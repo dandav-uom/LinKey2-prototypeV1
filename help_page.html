@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+  <html>
+  <!-- improt various libraries -->
+    <head Access-Control-Allow-Origin:*>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Site version 1</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css"href="styles.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/
+      font-awesome.min.css">
+      <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+    </head>
+    
+    <body>
+      <!-- Navigation bar at the top of the screen -->
+      <div >
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <li class="navbar-brand" href="">LinKey2</li>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="./main_page.html">Home</a></li>
+              <li><a href="species_index_page.html">Species index</a></li>
+            </ul>
+          </div>
+        </nav> 
+        <div class="matrixkeytitle" style="margin-left: 10px; margin-top: -10px;"><b>Bayesian multi-access identification key to linyphiid species -- data by Anna Stäubli, Bayesian implementation and interface by Daniel Davies </b> <span style="margin-left: 30px;" class="actionLink">| </span><span style="margin-left: 30px;" class="actionLink"><a id = "araneae" href="https://araneae.nmbe.ch/matrixlinkey">aranaea</a></span>
+        </div>
+
+        <!-- Container for all help text / images -->
+        <div class="col-sm-12">
+        	<div style="padding-bottom: 2%;">
+         <h3>How to use LinKey2</h3>
+<p>LinKey2 works very similarly to the original Stäubli key at araneae.nmbe.ch and is based on the same data collected by Anna Stäubli. It takes user input describing a specimen and tries to suggest possible identifications, narrowing down the options as more characters are specified. The main difference to the classical interface is that the tool assigns probabilities to a list of 1530 species according to how likely each is to be the species in question, using formal Bayesian calculations of posterior probabilities, instead of making binary yes/no decisions for each species.</p>
+
+<p>On the main page there are three columns: "Characters", "Selected" and "Species probabilities". 
+"Characters" contains a list of descriptions you can use to describe the species in question. Clicking on them will show a drop-down menu with choices for each character. After selecting one it will be moved to the "Selected" column. Descriptions can be entered in any order, and not all descriptors need to be used. It is up to the user how many characters they wish to enter and in which order. Typically, the more characters are entered the more likely it is that the tool will suggest the correct identification. Clicking on the question mark boxes will display a help pop up showing examples (in the final version all descriptions will have examples). </p>
+
+<p>The "Selected" column shows the currently selected description of a specimen. If you would like to change your selections, rather than reset you can simply click the remove button of an individual character.</p> 
+
+<p>The "Species probabilities" column displays all the species available in this version of the tool. They are ranked in descending order according to their current posterior probability (displayed as a percentage). If more than one species has the same probability, they will be shown in alphabetical order. Clicking on a species name will take you to the summary page for that species, displaying its values for the various descriptors used in this tool.</p> 
+
+<p>
+A full list of the species used in this key can also be accessed by clicking on the species index link at the top of the page.
+</p>
+
+<p>
+The araneae link will take you to the original key/data that this tool is based on. 
+</p>
+
+
+<h2>Basic vs. Advanced</h2>
+<p>
+Near the top of the main page, there is a button that can display either "Basic" or "Advanced". By default, Basic is selected. The Basic option allows for some errors in character description by the user. The "Advanced" option is for professionals or users who are confident in their ability not to make many errors. In "Advanced" mode, correct identification will likely take fewer inputs, but errors will have a greater chance to lead to misidentification. To access "Advanced" mode, simply click on it. </p> 
+
+<h2>User interface</h2>
+<img src="images/ui_no_border.jpg" height = "50%" width = "50%">  
+
+<p><b>1:</b> Link to return to the home page.</p> 
+<p><b>2:</b>  Link to the species index page, which contains a summary page of characters and their correct description for each species entry.</p>
+<p><b>3:</b> Link to a help page listing useful resources for spider identification, as well as information about the tool itself.</p> 
+<p><b>4:</b> Button to select either “basic” or “advanced” mode. 
+</p>
+<p><b>5:</b> List of characters, which can be clicked to reveal their possible character descriptions.</p> 
+<p><b>6:</b> Help pop up. Displays pictorial examples of each character description.</p> 
+<p><b>7:</b> A selected character description, which can be removed with the remove button.</p> 
+<p><b>8:</b> Link to the original LinKey.</p>
+<p><b>9:</b> List of all species entries, listed in descending order of probability of being the specimen described by the selected character states. Probability is shown as a percentage.  </p>                
+                  
+</div> 
+
+<div style="padding-bottom: 2%;">
+ <h3>Resources</h3>
+ <p><a style="color: blue;" href="https://araneae.nmbe.ch/">https://araneae.nmbe.ch/</a></p>
+ <p><a style="color: blue;" href="https://en.wikipedia.org/wiki/Spider_anatomy">https://en.wikipedia.org/wiki/Spider_anatomy</a></p>
+
+</div>
+</div>
+ </div>
+
+
+
+
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	 <!-- Latest compiled JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+       <script type="text/javascript" src = "LB.js"></script>
+
+  </div>
+
+  </body>
+</html>

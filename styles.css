@@ -1,0 +1,255 @@
+body {
+    font-family: "Helvetica";
+    width: auto;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+    overflow: -moz-scrollbars-vertical; 
+}
+
+
+h2 {
+  font-size: 20px;
+}
+
+ul {
+  list-style-type: none; /* Remove bullets */
+  padding: 10; /* Remove padding */
+  margin: 0; /* Remove margins */
+  font-size: 12;
+}
+
+button{
+  font-size: 15px;
+}
+
+
+
+.panel-heading{
+  font-size: 15px;
+  padding: 3px;
+  margin: 0px;
+}
+
+.list-group-item{
+  font-size: 13px;
+  margin: 1px;
+  padding: 1px;
+
+}
+
+.panel-group{
+  margin: 5px;
+}
+
+ /* Dropdown Button */
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+#probs {
+   border-color: #E0EEE0;
+  border-left-style: solid;
+  border-right-style: solid; 
+  border-width: thin;
+  padding: 0px;
+  margin: none;
+
+}
+
+#myInput {
+  width: 85%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+  align-self: : center;
+  margin-left: 8%;
+}
+
+#myInput2 {
+  margin-top: 12px;
+  width: 85%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+  align-self: : center;
+  margin-left: 8%;
+}
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: #858585;
+    color: white;
+
+}
+
+.col-sm-4{
+  height: 80vh;
+  
+}
+
+.LI{
+  border-color: #A6A6A6  ;
+  border-style: solid;
+  border-width: thin;
+  border-bottom: none;
+  padding: none;
+  width: 100%;
+  background-color: #f7f7f7;
+  float: left;
+}
+
+#myUL{
+  border-color: #E0EEE0;
+  border-style: solid;
+  border-width: thin;
+  padding: 0;
+  width: 100%;
+}
+
+
+#basic{
+  background-color: green;
+}
+
+#advanced{
+  background-color:  #c2c2d6;
+}
+
+
+a {
+  color: black;
+}
+
+
+#araneae{
+  color: blue;
+}
+
+#removeButton{
+  display: none;
+}
+
+.matrixkeytitle{
+  margin-left: 10px; 
+  margin-top: -10px;
+}
+
+.btn-group{
+  position: relative; 
+  width: 100%;
+  margin-left: 3%; 
+  margin-top: 1%
+
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 4%;
+  border: 1px solid #888;
+  width: 80%;
+  height: auto;
+  color: black;
+
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin-left: 90%;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+.help-text{
+  width: 100%;
+}
+
+
+.help_button{
+  background: white;
+  border: black ; 
+  color: blue;
+  margin-left: 1%;
+}
+
+.progress{
+  margin: 3px;
+}
+
+
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+
+
+.lb-js {   
+  cursor: pointer;
+  height: auto;
+  width: 50%;
+  float: center; 
+}
+
+.js-lightbox-content-container{
+  padding: 0px;
+  margin: 0px;
+
+}
+
+.table{
+  width: 100%;
+  padding:0px;
+  margin: 0px;
+  white-space: 0px;
+}
+
+.container{
+  width: auto;
+}

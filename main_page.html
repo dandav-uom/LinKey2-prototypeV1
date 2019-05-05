@@ -1,0 +1,2278 @@
+<!DOCTYPE html>
+<html>
+<!-- Add required libraries --> 
+  <head Access-Control-Allow-Origin:*>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Site version 1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+
+  </head>
+
+	<body>
+    
+<!-- Navigation pane at the top of the page -->    
+    <div style="width: 100%; overflow-x: hidden;">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <li class="navbar-brand" >LinKey2</li>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="main_page.html">Home</a></li>
+            <li><a href="species_index_page.html">Species index</a></li>
+            <li><a href="./help_page.html">Help</a></li>
+          </ul>
+        </div>
+      </nav> 
+      <div class="matrixkeytitle">
+        <b>Bayesian multi-access identification key to linyphiid species -- data by Anna Stäubli, Bayesian implementation and interface by Daniel Davies</b> 
+        <span style="margin-left: 30px;" class="actionLink">| </span>
+        <span style="margin-left: 30px;" class="actionLink">
+        <a id = "araneae" href="https://araneae.nmbe.ch/matrixlinkey">aranaea</a></span>
+      </div>
+
+<!-- Basic / Advanced mode button -->		 
+      <div class="row">
+        <span style="margin-left: 2%">
+          <div class="btn-group">
+            <button id = "basic" onclick="basicDictSet()" type="button" class="btn btn-primary">Basic</button>
+            <button id = "advanced" onclick="advancedDictSet()" type="button" class="btn btn-primary">Advanced</button>
+          </div> 
+        </span>
+
+<!--Character scolumn -->
+  			<div class="col-sm-4" id = "column1" >
+          <h2 align="" style="padding-left: 6%;">Characters</h2>
+          <div id = "toChoose" class="container"style="width: 90%; overflow: auto; height: 90%; top : 1px; padding: 0px; ">
+
+<!-- Drop down menu for sex character state selection -->
+            <div id = "Sex-panel" class="panel-group" data-divorder= "1">
+    				  <div  class="panel panel-default">
+      				  <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1">Sex</a>
+                  </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Sex: male', 'Sex-panel', `sex! Male`)" id = "buttons" class="list-group-item" >Male</button>
+          				  <button onclick="descripSelect('Sex: female', 'Sex-panel', `sex! Female`)" class="list-group-item" id = "buttons">Female</button>
+                    <button onclick = "removeSelection('Sex-panel', 'sex', 'Sex')"  class="list-group-item" id = "removeButton">Remove</button>
+        				  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for overall appearane (colouring) character state selection -->
+            <div id = "appearance-panel" class="panel-group" data-divorder= "2">
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse2">Overall appearance (colouring)</a>
+                     <button onclick="helpPopUp('myModal_1', 'helpBtn1', 'close_1')" id = "helpBtn1"  class = "help_button">?</button>
+<!-- Pop up help menu for overall appearance (colouring) character-->                     
+                    <div id="myModal_1" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_1" class="close" >&times;</span>    
+                        <div class="container" style="width: auto">
+                          <table class="table" >
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Inconspicuous, generally dark</td>
+                                <td>
+                                <img src="images/appearance_dark.jpg" class = "lb-js" data-type="image" data-path = "images/appearance_dark.jpg" data-theme = "trans" > 
+                                    <p class = "help-text">Piniphantes cirratus (Thaler, 1986)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Conspicuous contrast between legs and prosoma</td>
+                                <td>
+                                  <img  src = "images/appearance_contrast.jpg" class = "lb-js" data-type = "image" data-path = "images/appearance_contrast.jpg" data-theme = "trans">
+                                    <p class = "help-text">Agyneta rurestris (C.L.Koch, 1836)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">Pale, ground or cave dweller (careful with older specimens: fading)</p>
+                                </td>
+                                <td>
+                                  <img  src= "images/appearance_pale.jpg" class = "lb-js" data-type = "image"data-path = "images/appearance_pale.jpg" data-theme = "trans">                                  <p class = "help-text">Bordea negrei (Dresco, 1951)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Bright, red, orange</td>
+                                <td>
+                                  <img src = "images/appearance_bright.jpg" data-type = "image" class = "lb-js" data-path = "images/appearance_bright.jpg" data-theme = "trans">
+                                  <p class = "help-text">Gonatium rubens (Blackwall, 1833)</p>
+                              </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse" >
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Overall appearance (colouring): inconspicuous, generally dark', 'appearance-panel', `appearance! inconspicuous, generally dark`)" id = "buttons" class="list-group-item" >Inconspicuous, generally dark</button>
+                    <button onclick="descripSelect('Overall appearance (colouring): conspicuous contrast legs/prosoma', 'appearance-panel', `appearance! conspicuous contrast legs/prosoma`)" id = "buttons" class="list-group-item" >Conspicuous contrast legs/prosoma</button>
+                    <button onclick="descripSelect('Overall appearance (colouring): pale, ground or cave dweller (careful with older specimens: fading)', 'appearance-panel', `appearance! pale, ground or cave dweller (careful with older specimens: fading)`)" id = "buttons" class="list-group-item" >Pale, ground or cave dweller (careful with older specimens: fading)</button>
+                    <button onclick="descripSelect('Overall appearance (colouring): bright, red, orange', 'appearance-panel', `appearance! bright, red, orange`)" id = "buttons" class="list-group-item" > Bright, red, orange</button>
+                    <button onclick = "removeSelection('appearance-panel', 'appearance', 'Overall appearance (colouring)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button> 
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for length of femur one relative to prosoma character state selection-->
+            <div id = "length_femur_one_rel_d-panel" class="panel-group" data-divorder= "3">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse3">Length of femur I (relative to prosoma)</a>
+                    <button onclick="helpPopUp('myModal_2', 'helpBtn2', 'close_2')" id = "helpBtn2" class = "help_button">?</button>
+<!-- Pop up help menu for length of femur one relative to prosoma character -->                    
+                    <div id="myModal_2" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_2" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table" >
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Shorter than prosoma</td>
+                                <td>
+                                  <img src="images/femur_rel_prosoma_shorter.jpg" class = "lb-js" data-type = "image" data-path = "images/femur_rel_prosoma_shorter.jpg"></a>
+                                    <p class = "help-text">Erigonella ignobilis (O. P.-Cambridge, 1871)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Longer than prosoma</td>
+                                <td><img src="images/femur_rel_prosoma_longer.jpg" data-type = "image" class = "lb-js" data-path = "images/femur_rel_prosoma_longer.jpg">
+                                    <p class = "help-text">Improphantes decolor (Westring, 1861)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">Equal in length</p>
+                                </td>
+                                <td>
+                                  <img src ="images/femur_rel_prosoma_same.jpg" data-type = "image" data-path = "images/femur_rel_prosoma_same.jpg" class = "lb-js">
+                                  <p class = "help-text">Agyneta affinis M (Kulczynski, 1898)</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Length of femur I (relative to prosoma): shorter than prosoma', 'length_femur_one_rel_d-panel', `length_of_femur_1! shorter than prosoma`)" id = "buttons" class="list-group-item" >Shorter than prosoma</button>
+                    <button onclick="descripSelect('Length of femur I (relative to prosoma): longer than prosoma', 'length_femur_one_rel_d-panel', `length_of_femur_1! longer than prosoma`)" id = "buttons" class="list-group-item" >Longer than prosoma</button>
+                    <button onclick="descripSelect('Length of femur I (relative to prosoma): equal in length', 'length_femur_one_rel_d-panel', `length_of_femur_1! equal in length`)" id = "buttons" class="list-group-item" >Equal in length</button>
+                    <button onclick = "removeSelection('length_femur_one_rel_d-panel', 'length_of_femur_1', 'Length of femur I (relative to prosoma')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for prosoma appearance charcter state selection -->
+            <div id = "prosoma_appearance-panel" class="panel-group" data-divorder= "4">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse4">Prosoma appearance</a>
+                    <button onclick="helpPopUp('myModal_3', 'helpBtn3', 'close_3')" id = "helpBtn3" class = "help_button">?</button>
+<!-- Pop up help menu for prosoma appearance character -->
+                    <div id="myModal_3" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_3" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table" >
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Inconspicuous</td>
+                                <td>
+                                  <img src = "images/prosoma_appearance_incon.jpg" data-type = "image" class = "lb-js" data-path = "images/prosoma_appearance_incon.jpg">
+                                    <p class = "help-text">Frontinellina frutetorum (C. L. Koch, 1834)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>With pits (dorsally)</td>
+                                <td><img src ="images/prosoma_appearance_wpits.jpg" data-type = "image" class = "lb-js" data-path = "images/prosoma_appearance_wpits.jpg">
+                                    <p class = "help-text">Pelecopsis radicicola (L. Koch, 1872)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">Margin with teeth</p>
+                                </td>
+                                <td>
+                                  <img src = "images/prosoma_appearance_wteeth.jpg" data-type = "image" data-path = "images/prosoma_appearance_wteeth.jpg" class = "lb-js">
+                                  <p class = "help-text">Erigone dentipalpis (Wider, 1834)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">With conspicuous hairs/ spines</p>
+                                </td>
+                                <td>
+                                  <img src = "images/prosoma_appearance_hairs_spines.jpg" data-type = "image" data-path = "images/prosoma_appearance_hairs_spines.jpg" class = "lb-js">
+                                  <p class = "help-text">Mioxena blanda (Simon, 1884)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">Conspicuously hairy</p>
+                                </td>
+                                <td>
+                                 <img src = "images/prosoma_appearance_hairy.jpg" data-type = "image" data-path = "images/prosoma_appearance_hairy.jpg" class = "lb-js">
+                                  <p class = "help-text">Trichoncus scrofa (Simon, 1884)</p>
+                                </td>
+                              </tr>                                                                 
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Prosoma appearance: inconspicuous', 'prosoma_appearance-panel', `prosoma_appearance! inconspicuous`)" id = "buttons" class="list-group-item" >Inconspicuous</button>
+                    <button onclick="descripSelect('Prosoma appearance: with pits (dorsally)', 'prosoma_appearance-panel', `prosoma_appearance! with pits (dorsally)`)" id = "buttons" class="list-group-item" >With pits (dorsally)</button>
+                    <button onclick="descripSelect('Prosoma appearance: margin with teeth', 'prosoma_appearance-panel', `prosoma_appearance! margin with teeth`)" id = "buttons" class="list-group-item" >Margin with teeth</button>
+                    <button onclick="descripSelect('Prosoma appearance: with conspicuous hairs/spines', 'prosoma_appearance-panel', `prosoma_appearance! with conspicuous hairs/spines`)" id = "buttons" class="list-group-item" >With conspicuous hairs/spines</button>
+                    <button onclick="descripSelect('Prosoma appearance: conspicuously hairy', 'prosoma_appearance-panel', `prosoma_appearance! conspicuously hairy`)" id = "buttons" class="list-group-item" >Conspicuously hairy</button>
+                    <button onclick = "removeSelection('prosoma_appearance-panel', 'prosoma_appearance', 'Prosoma appearance')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for fovea visible as a darkened groove character states -->
+            <div id = "fovea_visible_dark_groove-panel" class="panel-group" data-divorder= "5"> 
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse5">Fovea clearly visible as a darkened groove</a>
+                    <button onclick="helpPopUp('myModal_4', 'helpBtn4', 'close_4')" id = "helpBtn4" class = "help_button">?</button>
+<!-- Pop up help menu for fovea visible as a darakened groove character -->
+                    <div id="myModal_4" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_4" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Yes</td>
+                                <td><img src="" class = "lb-js" data-type = "image" data-path = "">
+                                    <p class = "help-text">Species name here</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>No</td>
+                                <td><img src="" class = "help-image">
+                                    <p class = "help-text">Species name here</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse5" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Fovea clearly visible as a darkened groove: yes', 'fovea_visible_dark_groove-panel', `fovea_visible_dark_groove! yes`)" id = "buttons" class="list-group-item" >Yes</button>
+                    <button onclick="descripSelect('Fovea clearly visible as a darkened groove: no', 'fovea_visible_dark_groove-panel', `fovea_visible_dark_groove! no`)" id = "buttons" class="list-group-item" >No</button>
+                    <button onclick = "removeSelection('fovea_visible_dark_groove-panel', 'fovea_visible_dark_groove', 'Fovea clearly visible as a darkened groove')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for opisthosoma appearance character states -->
+            <div id = "opisthosoma_appearance-panel" class="panel-group" data-divorder= "6">      
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse6">Opisthosoma appearance</a>
+                    <button onclick="helpPopUp('myModal_5', 'helpBtn5', 'close_5')" id = "helpBtn5" class = "help_button">?</button>
+<!-- Pop up help menu for opisthosoma character -->
+                    <div id="myModal_5" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_5" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table" >
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Unicolourous, inconspicuous</td>
+                                <td><img src = "images/op_appearance_incon.jpg" data-type = "image" data-path = "images/op_appearance_incon.jpg" class= "lb-js">
+                                    <p class = "help-text">Agyneta fuscipalpa (C. L. Koch, 1836)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Patterned</td>
+                                <td><img src = "images/op_appearance_patterned.jpg" data-type = "image" data-path = "images/op_appearance_patterned.jpg" class="lb-js">
+                                    <p class = "help-text">Floronia bucculenta (Clerck, 1757)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">Conspicuously hairy</p>
+                                </td>
+                                <td>
+                                  <img src = "images/op_appearance_hairy.jpg" data-type = "image" data-path = "images/op_appearance_hairy.jpg" class = "lb-js" >
+                                  <p class = "help-text">Lasiargus hirsutus M (Menge, 1869)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class =  "help-text">With scutum</p>
+                                </td>
+                                <td>
+                                  <img src = "images/op_appearance_scutum.jpg" data-type = "image" data-path = "images/op_appearance_scutum.jpg" class = "lb-js" >
+                                  <p class =  "help-text">Pelecopsis radicicola (L. Koch, 1872)</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </h4>
+                </div>
+                <div id="collapse6" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Opisthosoma appearance: unicolourous, inconspicuous', 'opisthosoma_appearance-panel', `opisthosoma_appearance! unicolorous, inconspicuous`)" id = "buttons" class="list-group-item" >Unicolourous, inconspicuous</button>
+                    <button onclick="descripSelect('Opisthosoma appearance: patterned', 'opisthosoma_appearance-panel', `opisthosoma_appearance! patterned`)" id = "buttons" class="list-group-item" >Patterned</button>
+                    <button onclick="descripSelect('Opisthosoma appearance: conspicuously hairy', 'opisthosoma_appearance-panel', `opisthosoma_appearance! conspicuously hairy`)" id = "buttons" class="list-group-item" >Conspicuously hairy</button>
+                    <button onclick="descripSelect('Opisthosoma appearance: with scutum', 'opisthosoma_appearance-panel', `opisthosoma_appearance! with scutum`)" id = "buttons" class="list-group-item" >With scutum</button>
+                    <button onclick = "removeSelection('opisthosoma_appearance-panel', 'opisthosoma_appearance', 'Opisthosoma appearance')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for number of dorsal spines on femur one character states -->
+            <div id = "dorsal_spines_femur_1-panel" class="panel-group" data-divorder= "7">         
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse7">Dorsal spines on femur one</a>
+                    <button onclick="helpPopUp('myModal_6', 'helpBtn6', 'close_6')" id = "helpBtn6" class = "help_button">?</button>
+<!-- Pop up help menu for the number of dorsal spines on femur one character --> 
+                    <div id="myModal_6" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_6" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table"  >
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>One</td>
+                                <td><img src = "images/dorsal_spines_femur_one_1.jpg" data-type = "image" data-path = "images/dorsal_spines_femur_one_1.jpg" class = "lb-js">
+                                    <p class = "help-text">Bathyphantes gracilis (Blackwall, 1841)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Multiple</td>
+                                <td><img src = "images/dorsal_spines_femur_one_mult.jpg" data-type = "image" data-path = "images/dorsal_spines_femur_one_mult.jpg" class = "lb-js">
+                                    <p class = "help-text">Centromerus sellarius (Simon, 1884)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">None</p>
+                                </td>
+                                <td>
+                                  <img src ="images/dorsal_spines_femur_one_none.jpg" data-type = "image" data-path = "images/dorsal_spines_femur_one_none.jpg" class = "lb-js">
+                                  <p class =  "help-text">Gonatium occidentale (Simon, 1918)</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse7" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Dorsal spines on femur one: one', 'dorsal_spines_femur_1-panel', `dorsal_spines_femur_1! one`)" id = "buttons" class="list-group-item" >One</button>
+                    <button onclick="descripSelect('Dorsal spines on femur one: multiple', 'dorsal_spines_femur_1-panel', `dorsal_spines_femur_1! multiple`)" id = "buttons" class="list-group-item" >Multiple</button>
+                    <button onclick="descripSelect('Dorsal spines on femur one: none', 'dorsal_spines_femur_1-panel', `dorsal_spines_femur_1! none`)" id = "buttons" class="list-group-item" >None</button>
+                    <button onclick = "removeSelection('dorsal_spines_femur_1-panel', 'dorsal_spines_femur_1', 'Dorsal spines on femur one')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for posterior eye row form character states -->
+            <div id = "posterior_eye_row_form-panel" class="panel-group" data-divorder= "8">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse8">Posterior eye row (form)</a>
+                    <button onclick="helpPopUp('myModal_7', 'helpBtn7', 'close_7')" id = "helpBtn7" class = "help_button">?</button>
+<!-- Pop up help menu for posterior eye row form character -->
+                    <div id="myModal_7" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_7" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Procurved</td>
+                                <td><img src = "images/eye_row_procurved.jpg" data-type = "image" data-path = "images/eye_row_procurved.jpg" class = "lb-js">
+                                    <p class = "help-text">Diplocephalus lusiscus (Simon, 1872)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Straight</td>
+                                <td><img src = "images/eye_row_straight.jpg" data-type = "image" data-path = "images/eye_row_straight.jpg" class = "lb-js">
+                                    <p class = "help-text">Bordea cavicola (Simon, 1884)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class =  "help-text">Recurved</p>
+                                </td>
+                                <td>
+                                  <img src = "images/eye_row_recurved.jpg" data-type = "image" data-path = "images/eye_row_recurved.jpg" class = "lb-js">
+                                  <p class = "help-text">Hypomma fulvum (Bösenberg, 1902)</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                                        
+                  </h4>
+                </div>
+                <div id="collapse8" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Posterior eye row form: procurved', 'posterior_eye_row_form-panel', `posterior_eye_row_form! procurved`)" id = "buttons" class="list-group-item" >Procurved</button>
+                    <button onclick="descripSelect('Posterior eye row form: straight', 'posterior_eye_row_form-panel', `posterior_eye_row_form! straight`)" id = "buttons" class="list-group-item" >Straight</button>
+                    <button onclick="descripSelect('Posterior eye row form: recurved', 'posterior_eye_row_form-panel', `posterior_eye_row_form! recurved`)" id = "buttons" class="list-group-item" >Recurved</button>
+                    <button onclick = "removeSelection('posterior_eye_row_form-panel', 'posterior_eye_row_form', 'Posterior eye row (form)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for posterior median eye separation relative to diameter character states -->
+            <div id = "pme_sep_rel_diam-panel" class="panel-group" data-divorder= "9">
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse9">Posterior median eye (PME) separation (relative to diameter (d)</a>
+                    <button onclick="helpPopUp('myModal_8', 'helpBtn8', 'close_8')" id = "helpBtn8" class = "help_button">?</button>
+<!-- Pop up help menu for psoterior median eye separation relative to diameter character -->
+                    <div id="myModal_8" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_8" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Equal to d</td>
+                                <td><img src= "images/pme_sep_equal.jpg" data-type = "image" data-path = "images/pme_sep_equal.jpg" class = "lb-js">
+                                    <p class = "help-text">Bordea cavicola (Simon, 1884)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Distinctly greater than d</td>
+                                <td><img src = "images/pme_sep_greater.jpg" data-type = "image" data-path = "images/pme_sep_greater.jpg" class = "lb-js" >
+                                    <p class= "help-text">Minicia candida (Denis, 1946)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">Distinctly less than d</p>
+                                </td>
+                                <td>
+                                  <img src = "images/pme_sep_less.jpg" data-type = "image" data-path = "images/pme_sep_less.jpg" class = "lb-js">
+                                  <p class = "help-text">Maro lepidus (Casemir, 1961)</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                                    
+                  </h4>
+                </div>
+                <div id="collapse9" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Posterior median eye (PME) separation (relative to diameter (d): equal to d', 'pme_sep_rel_diam-panel', `pme_sep_rel_diam! equal to d`)" id = "buttons" class="list-group-item" >Equal to d</button>
+                    <button onclick="descripSelect('Posterior median eye (PME) separation (relative to diameter (d): distinctly greater than d', 'pme_sep_rel_diam-panel', `pme_sep_rel_diam! distinctly greater than d`)" id = "buttons" class="list-group-item" >Distinctly greater than d</button>
+                    <button onclick="descripSelect('Posterior median eye (PME) separation (relative to diameter (d): distinctly less than d', 'pme_sep_rel_diam-panel', `pme_sep_rel_diam! distinctly less than d`)" id = "buttons" class="list-group-item" >Distinctly less than d</button>
+                    <button onclick = "removeSelection('pme_sep_rel_diam-panel', 'pme_sep_rel_diam', 'Posterior median eye (PME) separation (relative to diameter (d)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for head region of male character states -->
+            <div id = "head_region_male-panel" class="panel-group" data-divorder= "10" data-sex = "male">
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse10">Head region of male</a>
+                    <button onclick="helpPopUp('myModal_9', 'helpBtn9', 'close_9')" id = "helpBtn9" class = "help_button">?</button>
+<!-- Pop up help menu for head region of male character -->
+                    <div id="myModal_9" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_9" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Sulci present</td>
+                                <td><img src = "images/head_region_male_sulci.jpg" data-type = "image" data-path = "images/head_region_male_sulci.jpg" class = "lb-js">
+                                    <p class = "help-text">Tapinocyba insecta M (L. Koch, 1869)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>With lobe (simple)</td>
+                                <td><img src = "images/head_region_male_lobe_simple.jpg" data-type = "image" data-path = "images/head_region_male_lobe_simple.jpg" class = "lb-js">
+                                    <p class = "help-text">Araeoncus crassiceps M (Westring, 1861)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">Complex</p>
+                                </td>
+                                <td>
+                                  <img src = "images/head_region_male_complex.jpg" data-type = "image" data-path = "images/head_region_male_complex.jpg" class = "lb-js">
+                                  <p class = "help-text">Diplocephalus latifrons M (O. P. - Cambridge, 1863)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">With horns/tufts</p>
+                                </td>
+                                <td>
+                                  <img src = "images/head_region_male_tufts.jpg" data-type = "image" data-path = "images/head_region_male_tufts.jpg" class = "lb-js">
+                                  <p class = "help-text">Walckenaeria monoceros M (Wider, 1834)</p>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><p class = "help-text">Inconspicuous</p>
+                                </td>
+                                <td>
+                                  <img src = "images/head_region_male_incon.jpg" data-type = "image" data-path = "images/head_region_male_incon.jpg" class = "lb-js">
+                                  <p class = "help-text">Walckenaeria monoceros M (Wider, 1834)</p>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse10" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Head region of male: sulci present', 'head_region_male-panel', `head_region_male! sulci present`)" id = "buttons" class="list-group-item" >Sulci present</button>
+                    <button onclick="descripSelect('Head region of male: with lobe (simple)', 'head_region_male-panel', `head_region_male! with lobe (simple)`)" id = "buttons" class="list-group-item" >With lobe (simple)</button>
+                    <button onclick="descripSelect('Head region of male: complex', 'head_region_male-panel', `head_region_male! complex`)" id = "buttons" class="list-group-item" >Complex</button>
+                    <button onclick="descripSelect('Head region of male: with horns/tufts', 'head_region_male-panel', `head_region_male! with horns/tufts`)" id = "buttons" class="list-group-item" >With horns/tufts</button>
+                    <button onclick="descripSelect('Head region of male: inconspicuous', 'head_region_male-panel', `head_region_male! inconspicuous`)" id = "buttons" class="list-group-item" >Inconspicuous</button>
+                    <button onclick = "removeSelection('head_region_male-panel', 'head_region_male', 'Head region of male')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for eye appearance character states -->
+            <div id = "eye_appearance-panel" class="panel-group" data-divorder= "11">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                  <a  data-toggle="collapse" href="#collapse11">Eye appearance</a>
+                  <button onclick="helpPopUp('myModal_10', 'helpBtn10', 'close_10')" id = "helpBtn10" class = "help_button">?</button>
+<!-- Pop up help menu for eye appeearance character -->
+                    <div id="myModal_10" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_10" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Normal</td>
+                                <td><img src = "images/eyes_normal.jpg" data-type = "image" data-path = "images/eyes_normal.jpg" class = "lb-js">
+                                    <p class = "help-text">Acartauchenius scurrilis M (O. P.-Cambridge, 1872)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Reduced</td>
+                                <td><img src = "images/eyes_reduced.jpg" data-type = "image" data-path = "images/eyes_reduced.jpg" class = "lb-js">
+                                    <p class = "help-text">Porrhomma egeria M (Simon, 1884)</p>
+                                  </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>  
+                  </h4>                
+                </div>
+                <div id="collapse11" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Eye appearance: normal', 'eye_appearance-panel', `eye_appearance! normal`)" id = "buttons" class="list-group-item" >Normal</button>
+                    <button onclick="descripSelect('Eye appearance: reduced', 'eye_appearance-panel', `eye_appearance! reduced`)" id = "buttons" class="list-group-item" >Reduced</button>
+                    <button onclick = "removeSelection('eye_appearance-panel', 'eye_appearance', 'Eye appearance')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for size of anterior median eyes relative to anterior lateral eyes character states -->
+            <div id = "size_ame_rel_ale-panel" class="panel-group" data-divorder= "12">              
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse12">Anterior median eyes (size relative to anterior lateral eyes ALE)</a>
+                    <button onclick="helpPopUp('myModal_11', 'helpBtn11', 'close_11')" id = "helpBtn11" class = "help_button">?</button>
+<!-- Pop up help menu for anterior median eyes relative to anterior lateral eyes character -->
+                    <div id="myModal_11" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_11" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table" style="width: 80%;" >
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Distinctly smaller than ALE</td>
+                                <td><a href = "images/AME_ALE_smaller.jpg" data-lightbox = "img-35"> <img src="images/AME_ALE_smaller.jpg" class = "help-image"></a>
+                                    <p class = "help-text">Acartauchenius scurrilis W (O. P.-Cambridge, 1872)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>About the same as ALE</td>
+                                <td><a href = "images/AME_ALE_same.jpg" data-lightbox = "img-36"> <img src="images/AME_ALE_same.jpg" class = "help-image"></a>
+                                    <p class = "help-text">Erigone dentipalpis M (Wider, 1834)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Distinctly greater than ALE</td>
+                                <td><a href = "images/AME_ALE_larger.jpg" data-lightbox = "img-37"> <img src="images/AME_ALE_larger.jpg" class = "help-image"></a>
+                                    <p class = "help-text">Tapinopa longidens M (Wider, 1834)</p>
+                                  </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>  
+                  </h4>
+                </div>
+                <div id="collapse12" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Anterior median eyes (size relative to anterior lateral eyes ALE): distinctly smaller than ALE', 'size_ame_rel_ale-panel', `size_ame_rel_ale! distinctly smaller than ALE`)" id = "buttons" class="list-group-item" >Distinctly smaller than ALE</button>
+                    <button onclick="descripSelect('Anterior median eyes (size relative to anterior lateral eyes ALE): about the same as ALE', 'size_ame_rel_ale-panel', `size_ame_rel_ale! about the same as ALE`)" id = "buttons" class="list-group-item" >About the same as ALE</button>
+                    <button onclick="descripSelect('Anterior median eyes (size relative to anterior lateral eyes ALE): distinctly larger than ALE', 'size_ame_rel_ale-panel', `size_ame_rel_ale! distinctly larger than ALE`)" id = "buttons" class="list-group-item" >Distinctly larger than ALE</button>
+                    <button onclick = "removeSelection('size_ame_rel_ale-panel', 'size_ame_rel_ale', 'Anterior median eyes (size relative to anterior lateral eyes ALE)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for prolateral spines on femur one character states -->
+            <div id = "prolateral_spines_femur_I-panel" class="panel-group" data-divorder= "13">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse13">Prolateral spines on femur I (count)</a>
+                    <button onclick="helpPopUp('myModal_12', 'helpBtn12', 'close_12')" id = "helpBtn12" class = "help_button">?</button>
+<!-- Pop up help menu for prolateral spines on femur one character -->
+                    <div id="myModal_12" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_12" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>One</td>
+                                <td><img src = "images/pro_spines_femur_1.jpg" data-type = "image" data-path = "images/pro_spines_femur_1.jpg" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>None</td>
+                                <td><img src = "images/pro_spines_femur_1_none.jpg" data-type = "image" data-path = "images/pro_spines_femur_1_none.jpg" class = "lb-js">
+                                    <p class = "help-text">Agyneta decora M (O. P.-Cambridge, 1871)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Multiple</td>
+                                <td><img src = "images/pro_spines_femur_1_multiple.jpg" data-type = "image" data-path = "images/pro_spines_femur_1_multiple.jpg" class = "lb-js">
+                                    <p class = "help-text">Bathyphantes approximatus M (O. P.-Cambridge, 1871)</p>
+                                  </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse13" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Prolateral spines on femur I (count): none', 'prolateral_spines_femur_I-panel', `prolateral_spines_femur_I! none`)" id = "buttons" class="list-group-item" >None</button>
+                    <button onclick="descripSelect('Prolateral spines on femur I (count): one', 'prolateral_spines_femur_I-panel', `prolateral_spines_femur_I! one`)" id = "buttons" class="list-group-item" >One</button>
+                    <button onclick="descripSelect('Prolateral spines on femur I (count): multiple', 'prolateral_spines_femur_I-panel', `prolateral_spines_femur_I! multiple`)" id = "buttons" class="list-group-item" >Multiple</button>
+                    <button onclick = "removeSelection('prolateral_spines_femur_I-panel', 'prolateral_spines_femur_I', 'Prolateral spines on femur I (count)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for prolateral spines on tibia 1 character states -->
+            <div id = "prolateral_spines_tibia_I-panel" class="panel-group" data-divorder= "14">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse14">Prolateral spines on tibia I (count)</a>
+                    <button onclick="helpPopUp('myModal_13', 'helpBtn13', 'close_13')" id = "helpBtn13" class = "help_button">?</button>
+<!-- Pop up help menu for prolateral spines on tibia 1 character -->
+                    <div id="myModal_13" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_13" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>One</td>
+                                <td><img src = "images/pro_spines_tibia_1_1.jpg" data-type = "image" data-path = "images/pro_spines_tibia_1_1.jpg" class = "lb-js">
+                                    <p class = "help-text">Bathyphantes nigrinus M (Westring, 1851)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>None</td>
+                                <td><img src = "images/pro_spines_tibia_1_none.jpg" data-type = "image" data-path = "images/pro_spines_tibia_1_none.jpg" class = "lb-js">
+                                    <p class = "help-text">Agyneta alpica M (Tanasevitch, 2000)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Multiple</td>
+                                <td><img src = "images/pro_spines_tibia_1_mult.jpg" data-type = "image" data-path = "images/pro_spines_tibia_1_mult.jpg" class = "lb-js">
+                                    <p class = "help-text">Tenuiphantes alacris M (Blackwall, 1853)</p>
+                                  </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                                        
+                  </h4>
+                </div>
+                <div id="collapse14" class="panel-collapse collapse">
+                  <ul class="list-group" id = "list-group">
+                    <button onclick="descripSelect('Prolateral spines on tibia I: none', 'prolateral_spines_tibia_I-panel', `prolateral_spines_tibia_I! none`)" id = "buttons" class="list-group-item" >None</button>
+                    <button onclick="descripSelect('Prolateral spines on tibia I: one', 'prolateral_spines_tibia_I-panel', `prolateral_spines_tibia_I! one`)" id = "buttons" class="list-group-item" >One</button>
+                    <button onclick="descripSelect('Prolateral spines on tibia I: multiple', 'prolateral_spines_tibia_I-panel', `prolateral_spines_tibia_I! multiple`)" id = "buttons" class="list-group-item" >Multiple</button>
+                    <button onclick = "removeSelection('prolateral_spines_tibia_I-panel', 'prolateral_spines_tibia_I', 'Prolateral spines on tibia I')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for anterior cheliceral teeth character states -->
+            <div id = "anterior_cheliceral_teeth-panel" class="panel-group" data-divorder= "15">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse15">Anterior cheliceral teeth (appearance)</a>
+                    <button onclick="helpPopUp('myModal_14', 'helpBtn14', 'close_14')" id = "helpBtn14" class = "help_button">?</button>
+<!-- Pop up help menu for anterior cheliceral teeth character -->
+                    <div id="myModal_14" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_14" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Unremarkable in size</td>
+                                <td><img src = "images/ant_cher_teeth_large.jpg" data-type = "image" data-path = "images/ant_cher_teeth_large.jpg" class = "lb-js">
+                                    <p class = "help-text">Erigone arctica M (White, 1852)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Conspicuously large</td>
+                                <td><img src = "images/ant_cher_teeth_incon.jpg" data-type = "image" data-path = "images/ant_cher_teeth_incon.jpg" class = "lb-js">
+                                    <p class = "help-text">Erigonella ignobilis M (O. P.-Cambridge, 1871)</p>
+                                  </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse15" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Anterior cheliceral teeth: unremarkable in size', 'anterior_cheliceral_teeth-panel', `anterior_cheliceral_teeth! unremarkable in size`)" id = "buttons" class="list-group-item" >Unremarkable in size</button>
+                    <button onclick="descripSelect('Anterior cheliceral teeth: conspicuously large', 'anterior_cheliceral_teeth-panel', `anterior_cheliceral_teeth! conspicuously large`)" id = "buttons" class="list-group-item" >Conspicuously large</button>
+                    <button onclick = "removeSelection('anterior_cheliceral_teeth-panel', 'anterior_cheliceral_teeth', 'Anterior cheliceral teeth (appearance)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for conspicuous strucutres on chelicerae character states -->
+            <div id = "conspicuous_struct_chelicerae-panel" class="panel-group" data-divorder= "16">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse16">Conspicuous structures on chelicerae</a>
+                    <button onclick="helpPopUp('myModal_15', 'helpBtn15', 'close_15')" id = "helpBtn15" class = "help_button">?</button>
+<!-- Pop up help menu for conspicuous structures on chelicerae character -->  
+                    <div id="myModal_15" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_15" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>None</td>
+                                <td><img src = "images/struct_chel_none.jpg" data-type = "image" data-path = "images/struct_chel_none.jpg" class = "lb-js">
+                                    <p class = "help-text">Diplocephalus graecus M (O. P.-Cambridge, 1872)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td> Apophyses/teeth-like processes/tubercles</td>
+                                <td><img src = "images/struct_chel_teethlike.jpg" data-type = "image" data-path = "images/struct_chel_teethlike.jpg" class = "lb-js">
+                                    <p class = "help-text">Caviphantes saxetorum M (Hull, 1916)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Spines</td>
+                                <td><img src = "images/struct_chel_spines.jpg" data-type = "image" data-path = "images/struct_chel_spines.jpg" class = "lb-js">
+                                    <p class = "help-text">Drapetisca socialis M (Sundevall, 1833)</p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse16" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Conspicuous structures on chelicerae: none', 'conspicuous_struct_chelicerae-panel', `conspicuous_struct_chelicerae! none`)" id = "buttons" class="list-group-item" >None</button>
+                    <button onclick="descripSelect('Conspicuous structures on chelicerae: apophyses/teeth-like processes/tubercles', 'conspicuous_struct_chelicerae-panel', `conspicuous_struct_chelicerae! apophyses/teeth-like processes/tubercles`)" id = "buttons" class="list-group-item" > Apophyses/teeth-like processes/tubercles</button>
+                    <button onclick="descripSelect('Conspicuous structures on chelicerae: spines', 'conspicuous_struct_chelicerae-panel', `conspicuous_struct_chelicerae! spines`)" id = "buttons" class="list-group-item" > Spines</button>
+                    <button onclick = "removeSelection('conspicuous_struct_chelicerae-panel', 'conspicuous_struct_chelicerae', 'Conspicuous structures on chelicerae')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for maxillae appearance character states -->
+            <div id = "maxillae-panel" class="panel-group" data-divorder= "17">    
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse17">Maxillae (appearance)</a>
+                  <button onclick="helpPopUp('myModal_16', 'helpBtn16', 'close_16')" id = "helpBtn16" class = "help_button">?</button>
+<!-- Pop up help menu for maxillae appearance character -->     
+                    <div id="myModal_16" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_16" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>With one or more teeth/tubercles</td>
+                                <td><img src = "images/max_teeth.jpg" data-type = "image" data-path = "images/max_teeth.jpg" class = "lb-js">
+                                    <p class = "help-text">Erigone dentigera M O. P.-Cambridge, 1874</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Unremarkable</td>
+                                <td><img src = "images/max_none.jpg" data-type = "image" data-path = "images/max_none.jpg" class = "lb-js">
+                                    <p class = "help-text">Agyneta alpica M (Tanasevitch, 2000)</p>
+                                  </td>
+                              </tr>                         
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse17" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Maxillae (appearance): one or more teeth/tubercles', 'maxillae-panel', `maxillae! one or more teeth/tubercles`)" id = "buttons" class="list-group-item" >One or more teeth/tubercles</button>
+                    <button onclick="descripSelect('Maxillae (appearance): unremarkable', 'maxillae-panel', `maxillae! unremarkable`)" id = "buttons" class="list-group-item" >Unremarkable</button>
+                    <button onclick = "removeSelection('maxillae-panel', 'maxillae', 'Maxillae (appearance)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for Female palp claw appearance character states -->
+            <div id = "female_palp-panel" class="panel-group" data-divorder= "18" data-sex="female">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse18">Female palp (claw presence)</a>
+                    <button onclick="helpPopUp('myModal_17', 'helpBtn17', 'close_17')" id = "helpBtn17" class = "help_button">?</button>
+<!-- Pop up help menu for female palp claw appearance character -->
+                    <div id="myModal_17" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_17" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Conspicuous</td>
+                                <td><img src = "images/female_palp_claw_present.jpg" data-type = "image" data-path = "images/female_palp_claw_present.jpg" class = "lb-js">
+                                    <p class = "help-text">Bathyphantes nigrinus W (Westring, 1851)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Inconspicuous</td>
+                                <td><img src = "images/female_palp_claw_incon.jpg" data-type = "image" data-path = "images/female_palp_claw_incon.jpg" class = "lb-js">
+                                    <p class = "help-text">Abacoproeces saltuum W (L. Koch, 1872)</p>
+                                  </td>
+                              </tr>                           
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse18" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Female palp (claw presence): not present/inconspicuous', 'female_palp-panel', `female_palp! not present/inconspicuous`)" id = "buttons" class="list-group-item" >Not present/inconspicuous</button>
+                    <button onclick="descripSelect('Female palp (claw presence): conspicuous', 'female_palp-panel', `female_palp! conspicuous`)" id = "buttons" class="list-group-item" >Conspicuous</button>
+                    <button onclick = "removeSelection('female_palp-panel', 'female_palp', 'Female palp (claw presence)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for sternum appearance character states -->
+            <div id = "sternum_appearance-panel" class="panel-group" data-divorder= "19">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse19">Sternum (appearance)</a>
+                    <button onclick="helpPopUp('myModal_18', 'helpBtn18', 'close_18')" id = "helpBtn18" class = "help_button">?</button>
+<!-- Pop up help menu for sternum appearance character -->
+                    <div id="myModal_18" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_18" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Smooth</td>
+                                <td><img src = "images/sternum_app_smooth.jpg" data-type = "image" data-path = "images/sternum_app_smooth.jpg" class = "lb-js">
+                                    <p class = "help-text">Abacoproeces saltuum M (L. Koch, 1872)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Rugose</td>
+                                <td><img src = "images/sternum_app_rugose.jpg" data-type = "image" data-path = "images/sternum_app_rugose.jpg" class = "lb-js">
+                                    <p class = "help-text">Ceraticelus bulbosus M (Emerton, 1882)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Pitted</td>
+                                <td><img src = "images/sternum_app_pitted.jpg" data-type = "image" data-path = "images/sternum_app_pitted.jpg" class = "lb-js">
+                                    <p class = "help-text">Lophomma punctatum M (Blackwall, 1841)</p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse19" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Sternum (appearance): smooth', 'sternum_appearance-panel', `sternum_appearance! smooth`)" id = "buttons" class="list-group-item" >Smooth</button>
+                    <button onclick="descripSelect('Sternum (appearance): rugose', 'sternum_appearance-panel', `sternum_appearance! rugose`)" id = "buttons" class="list-group-item" >Rugose</button>
+                    <button onclick="descripSelect('Sternum (appearance): pitted', 'sternum_appearance-panel', `sternum_appearance! pitted`)" id = "buttons" class="list-group-item" >Pitted</button>
+                    <button onclick = "removeSelection('sternum_appearance-panel', 'sternum_appearance', 'Sternum (appearance)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for sternum extends between coxae 4 character states -->
+            <div id = "sternum_extends_betw_coxaeIV-panel" class="panel-group" data-divorder= "20">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse20">Sternum (extends between coxae IV)</a>
+                    <button onclick="helpPopUp('myModal_?', 'helpBtn?', 'close_?')" id = "helpBtn?" class = "help_button">?</button>
+<!-- Pop up help menu for sternum extends between coxae 4 characters -->
+                    <div id="myModal_?" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_?" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>No</td>
+                                <td><img src = "images/sternum_extends_no.jpg" data-type = "image" data-path = "images/sternum_extends_no.jpg" class = "lb-js">
+                                    <p class = "help-text">Aphileta misera W (O. P.-Cambridge, 1882)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Yes</td>
+                                <td><img src = "images/sternum_extends_yes.jpg" data-type = "image" data-path = "images/sternum_extends_yes.jpg" class = "lb-js">
+                                    <p class = "help-text">Abacoproeces saltuum M (L. Koch, 1872)</p>
+                                  </td>
+                              </tr>                           
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse20" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Sternum (extends between coxae IV): yes', 'sternum_extends_betw_coxaeIV-panel', `sternum_extends_betw_coxaeIV! yes`)" id = "buttons" class="list-group-item" >Yes</button>
+                    <button onclick="descripSelect('Sternum (extends between coxae IV): no', 'sternum_extends_betw_coxaeIV-panel', `sternum_extends_betw_coxaeIV! no`)" id = "buttons" class="list-group-item" >No</button>
+                    <button onclick = "removeSelection('sternum_extends_betw_coxaeIV-panel', 'sternum_extends_betw_coxaeIV', 'Sternum (extends between coxae IV)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for width of sternum between coxae relative to diameter character states -->
+            <div id = "width_sternum_betw_coxae_rel_d-panel" class="panel-group" data-divorder= "21">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse21">Width of sternum between coxae IV (relative to width of coxae IV (d))</a>
+                    <button onclick="helpPopUp('myModal_20', 'helpBtn20', 'close_20')" id = "helpBtn20" class = "help_button">?</button>
+<!-- Pop up help menu for width of sternum between coxae relative to diameter character states-->
+                    <div id="myModal_20" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_20" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Distinctly greater than d</td>
+                                <td><img src = "images/width_sternum_greater.jpg" data-type = "image" data-path = "images/width_sternum_greater.jpg" class = "lb-js">
+                                    <p class = "help-text">Araeoncus humilis W (Blackwall, 1841)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Equal to d</td>
+                                <td><img src = "images/width_sternum_equal.jpg" data-type = "image" data-path = "images/width_sternum_equal.jpg" class = "lb-js">
+                                    <p class = "help-text">Acartauchenius scurrilis M (O. P.-Cambridge, 1872)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Smaller than d</td>
+                                <td><img src = "images/width_sternum_smaller.jpg" data-type = "image" data-path = "images/width_sternum_smaller.jpg" class = "lb-js">
+                                    <p class = "help-text">Agyneta ramosa M (Jackson, 1912)</p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse21" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Width of sternum between coxae IV (relative to width of coxae IV (d)): distinctly greater than d', 'width_sternum_betw_coxae_rel_d-panel', `width_sternum_betw_coxae_rel_d! distinctly greater than d`)" id = "buttons" class="list-group-item" >Distinctly greater than d</button>
+                    <button onclick="descripSelect('Width of sternum between coxae IV (relative to width of coxae IV (d)): equal to d', 'width_sternum_betw_coxae_rel_d-panel', `width_sternum_betw_coxae_rel_d! equal to d`)" id = "buttons" class="list-group-item" >Equal to d</button>
+                    <button onclick="descripSelect('Width of sternum between coxae IV (relative to width of coxae IV (d)): distinctly less than d', 'width_sternum_betw_coxae_rel_d-panel', `width_sternum_betw_coxae_rel_d! distinctly less than d`)" id = "buttons" class="list-group-item" >Distinctly less than d</button>
+                    <button onclick = "removeSelection('width_sternum_betw_coxae_rel_d-panel', 'width_sternum_betw_coxae_rel_d', 'Width of sternum between coxae IV (relative to width of coxae IV (d))')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for metatarsus 4 dorsally presence of trichobothrium character states-->
+            <div id = "metaIV_dorsally_tmIV_presence-panel" class="panel-group" data-divorder= "22">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse22">Metatarsus IV dorsally (presence of trichobothrium (TmIV)</a>
+                    <button onclick="helpPopUp('myModal_21', 'helpBtn21', 'close_21')" id = "helpBtn21" class = "help_button">?</button>
+<!-- Pop up help menu for metatarsus 4 dorsally presence of trichobothrium character -->
+                    <div id="myModal_21" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_21" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Trichobothrium present</td>
+                                <td><img src = "images/" data-type = "image" data-path = "images/" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Trichobothrium absent</td>
+                                <td><img src = "images/" data-type = "image" data-path = "images/" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>                          
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse22" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Metatarsus IV dorsally (presence of trichobothrium (TmIV): trichobothrium present', 'metaIV_dorsally_tmIV_presence-panel', `metaIV_dorsally_tmIV_presence! trichobothrium present`)" id = "buttons" class="list-group-item" >Trichobothrium present</button>
+                    <button onclick="descripSelect('Metatarsus IV dorsally (presence of trichobothrium (TmIV): trichobothrium absent', 'metaIV_dorsally_tmIV_presence-panel', `metaIV_dorsally_tmIV_presence! trichobothrium absent`)" id = "buttons" class="list-group-item" >Trichobothrium absent</button>
+                    <button onclick = "removeSelection('metaIV_dorsally_tmIV_presence-panel', 'metaIV_dorsally_tmIV_presence', 'Metatarsus IV dorsally (presence of trichobothrium (TmIV)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for dorsal spines on metatarsus 1 character states -->
+            <div id = "dorsal_spines_meta_I-panel" class="panel-group" data-divorder= "23">             
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse23">Dorsal spines on metatarsus I (count)</a>
+                    <button onclick="helpPopUp('myModal_22', 'helpBtn22', 'close_22')" id = "helpBtn22" class = "help_button">?</button>
+<!-- Pop up help menu for dorsal spines on metatarsus 1 character -->
+                    <div id="myModal_22" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_22" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Multiple</td>
+                                <td><img src = "images/meta_1_dorsal_spines_mult.jpg" data-type = "image" data-path = "images/meta_1_dorsal_spines_mult.jpg" class = "lb-js">
+                                    <p class = "help-text">Linyphia tenuipalpis M (Simon, 1884)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>One</td>
+                                <td><img src = "images/meta_1_dorsal_spines_1.jpg" data-type = "image" data-path = "images/meta_1_dorsal_spines_1.jpg" class = "lb-js">
+                                    <p class = "help-text">Bordea cavicola M (Simon, 1884)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>None</td>
+                                <td><img src = "images/meta_1_dorsal_spines_none.jpg" data-type = "image" data-path = "images/meta_1_dorsal_spines_none.jpg" class = "lb-js">
+                                    <p class = "help-text">Agyneta affinis M (Kulczynski, 1898)</p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse23" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Dorsal spines on metatarsus I (count): none', 'dorsal_spines_meta_I-panel', `dorsal_spines_meta_I! none`)" id = "buttons" class="list-group-item" >None</button>
+                    <button onclick="descripSelect('Dorsal spines on metatarsus I (count): one', 'dorsal_spines_meta_I-panel', `dorsal_spines_meta_I! one`)" id = "buttons" class="list-group-item" >One</button>
+                    <button onclick="descripSelect('Dorsal spines on metatarsus I (count): multiple', 'dorsal_spines_meta_I-panel', `dorsal_spines_meta_I! multiple`)" id = "buttons" class="list-group-item" >Multiple</button>                
+                    <button onclick = "removeSelection('dorsal_spines_meta_I-panel', 'dorsal_spines_meta_I', 'Dorsal spines on metatarsus I (count)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for tibia 4 number of dorsal spines character states -->
+            <div id = "tibiaIV_num_dorsal_spines-panel" class="panel-group" data-divorder= "24">   
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse24">Tibia IV (number of dorsal spines)</a>
+                    <button onclick="helpPopUp('myModal_23', 'helpBtn23', 'close_23')" id = "helpBtn23" class = "help_button">?</button>
+<!-- Pop up help menu for tibia 4 number of dorsal spines character -->
+                    <div id="myModal_23" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_23" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>One dorsal spines</td>
+                                <td><img src = "images/tibia_4_dorsal_spines_1.jpg" data-type = "image" data-path = "images/tibia_4_dorsal_spines_1.jpg" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Two dorsal spines</td>
+                                <td><img src = "images/tibia_4_dorsal_spines_2.jpg" data-type = "image" data-path = "images/tibia_4_dorsal_spines_2.jpg" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>                       
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse24" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Tibia IV (number of dorsal spines): one dorsal spine', 'tibiaIV_num_dorsal_spines-panel', `tibiaIV_num_dorsal_spines! one dorsal spine`)" id = "buttons" class="list-group-item" >One dorsal spine</button>
+                    <button onclick="descripSelect('Tibia IV (number of dorsal spines): two dorsal spines', 'tibiaIV_num_dorsal_spines-panel', `tibiaIV_num_dorsal_spines! two dorsal spines`)" id = "buttons" class="list-group-item" >Two dorsal spines</button>                        
+                    <button onclick = "removeSelection('tibiaIV_num_dorsal_spines-panel', 'tibiaIV_num_dorsal_spines', 'Tibia IV (number of dorsal spines)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for number of dorsal spines on tibia 1-4 formula character states-->
+            <div id = "num_dorsal_spines_tibiaI-IV-panel" class="panel-group" data-divorder= "25">     
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse25">Number of dorsal spines on tibia I, II, III, IV (tibial spine formula)</a>
+                    <button onclick="helpPopUp('myModal_24', 'helpBtn24', 'close_24')" id = "helpBtn24" class = "help_button">?</button>
+<!-- Pop up help menu for number of dorsal spines on tibia 1-4 formula character -->                    
+                    <div id="myModal_24" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_24" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>0000</td>
+                                <td><img src = "images/spine_formula_0000.jpg" data-type = "image" data-path = "images/spine_formula_0000.jpg" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td><img src = "images/" data-type = "image" data-path = "images/" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td><img src = "images/" data-type = "image" data-path = "images/" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse25" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Number of dorsal spines on tibia I, II, III, IV (tibial spine formula): 0000', 'num_dorsal_spines_tibiaI-IV-panel', `num_dorsal_spines_tibiaI-IV! 0000`)" id = "buttons" class="list-group-item" >0000</button>
+                    <button onclick="descripSelect('Number of dorsal spines on tibia I, II, III, IV (tibial spine formula): 0011', 'num_dorsal_spines_tibiaI-IV-panel', `num_dorsal_spines_tibiaI-IV! 0011`)" id = "buttons" class="list-group-item" >0011</button>
+                    <button onclick="descripSelect('Number of dorsal spines on tibia I, II, III, IV (tibial spine formula): 1111', 'num_dorsal_spines_tibiaI-IV-panel', `num_dorsal_spines_tibiaI-IV! 1111`)" id = "buttons" class="list-group-item" >1111</button>
+                    <button onclick="descripSelect('Number of dorsal spines on tibia I, II, III, IV (tibial spine formula): 2211', 'num_dorsal_spines_tibiaI-IV-panel', `num_dorsal_spines_tibiaI-IV! 2211`)" id = "buttons" class="list-group-item" >2211</button>
+                    <button onclick="descripSelect('Number of dorsal spines on tibia I, II, III, IV (tibial spine formula): 2221', 'num_dorsal_spines_tibiaI-IV-panel', `num_dorsal_spines_tibiaI-IV! 2221`)" id = "buttons" class="list-group-item" >2221</button>
+                    <button onclick="descripSelect('Number of dorsal spines on tibia I, II, III, IV (tibial spine formula): 2222', 'num_dorsal_spines_tibiaI-IV-panel', `num_dorsal_spines_tibiaI-IV! 2222`)" id = "buttons" class="list-group-item" >2222</button>                
+                    <button onclick = "removeSelection('num_dorsal_spines_tibiaI-IV-panel', 'num_dorsal_spines_tibiaI-IV', 'Number of dorsal spines on tibia I, II, III, IV (tibial spine formula)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for tibia 1-2 presence of verntal spines character states  -->
+            <div id = "tibia_I_II_vent_spines-panel" class="panel-group" data-divorder= "26">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse26">Tibia I-II ventrally (presence of spines)</a>
+                    <button onclick="helpPopUp('myModal_25', 'helpBtn25', 'close_25')" id = "helpBtn25" class = "help_button">?</button>
+<!-- Pop up help menu for tibia 1-2 presence of verntal spines character -->
+                    <div id="myModal_25" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_25" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td></td>
+                                <td><img src = "images/" data-type = "image" data-path = "images/" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td><img src = "images/" data-type = "image" data-path = "images/" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td></td>
+                                <td><img src = "images/" data-type = "image" data-path = "images/" class = "lb-js">
+                                    <p class = "help-text"></p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </h4>
+                </div>
+                <div id="collapse26" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Tibia I-II ventrally (presence of spines): no spines', 'tibia_I_II_vent_spines-panel', `tibia_I_II_vent_spines! no spines`)" id = "buttons" class="list-group-item" >No spines</button>
+                    <button onclick="descripSelect('Tibia I-II ventrally (presence of spines): stout spines in two rows', 'tibia_I_II_vent_spines-panel', `tibia_I_II_vent_spines! stout spines in two rows`)" id = "buttons" class="list-group-item" >Stout spines in two rows</button>                     
+                    <button onclick = "removeSelection('tibia_I_II_vent_spines-panel', 'tibia_I_II_vent_spines', 'Tibia I-II ventrally (presence of spines)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for epigyne appearance character states -->
+            <div id = "epigyne_appearance-panel" class="panel-group" data-divorder= "27" data-sex = "female">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse27">Epigyne (appearance)</a>
+                    <button onclick="helpPopUp('myModal_26', 'helpBtn26', 'close_26')" id = "helpBtn26" class = "help_button">?</button>
+<!-- Pop up help menu for epigyne appearance character -->
+                    <div id="myModal_26" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_26" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Unremarkable</td>
+                                <td><img src = "images/epigyne_app_unremarkable.jpg" data-type = "image" data-path = "images/epigyne_app_unremarkable.jpg" class = "lb-js">
+                                    <p class = "help-text">Walckenaeria cucullata W (C. L. Koch, 1836)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>With atrium/cavity</td>
+                                <td><img src = "images/epigyne_app_atrium.jpg" data-type = "image" data-path = "images/epigyne_app_atrium.jpg" class = "lb-js">
+                                    <p class = "help-text">Micrargus subaequalis W (Westring, 1851)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>With lateral plates</td>
+                                <td><img src = "images/epigyne_app_plates.jpg" data-type = "image" data-path = "images/epigyne_app_plates.jpg" class = "lb-js">
+                                    <p class = "help-text">Diplocephalus latifrons W (O. P. - Cambridge, 1863)</p>
+                                  </td>
+                              </tr> 
+                               <tr>
+                                <td>With septum/medial structure</td>
+                                <td><img src = "images/epigyne_app_septum.jpg" data-type = "image" data-path = "images/" class = "lb-js">
+                                    <p class = "help-text">Walckenaeria corniculans W (O. P.-Cambridge, 1875)</p>
+                                  </td>
+                              </tr>  
+                              <tr>
+                                <td>With scape</td>
+                                <td><img src = "images/epigyne_app_scape.jpg" data-type = "image" data-path = "images/epigyne_app_scape.jpg" class = "lb-js">
+                                    <p class = "help-text">Moebelia penicillata W (Westring, 1851)</p>
+                                  </td>
+                              </tr>
+                               <tr>
+                                <td>With parmula (from posterior margin)</td>
+                                <td><img src = "images/epigyne_app_parmula.jpg" data-type = "image" data-path = "images/epigyne_app_parmula.jpg" class = "lb-js">
+                                    <p class = "help-text">Bathyphantes approximatus W (O. P.-Cambridge, 1871)</p>
+                                  </td>
+                              </tr>                                     
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse27" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Epigyne (appearance): with septum/medial structure', 'epigyne_appearance-panel', `epigyne_appearance! with septum/medial structure`)" id = "buttons" class="list-group-item" >With septum/medial structure</button>
+                    <button onclick="descripSelect('Epigyne (appearance): with scape (from anterior margin)', 'epigyne_appearance-panel', `epigyne_appearance! with scape (from anterior margin)`)" id = "buttons" class="list-group-item" >With scape (from anterior margin)</button>
+                    <button onclick="descripSelect('Epigyne (appearance): with lateral plates', 'epigyne_appearance-panel', `epigyne_appearance! with lateral plates`)" id = "buttons" class="list-group-item" >With lateral plates</button>
+                    <button onclick="descripSelect('Epigyne (appearance): unremarkable', 'epigyne_appearance-panel', `epigyne_appearance! unremarkable`)" id = "buttons" class="list-group-item" >Unremarkable</button>
+                    <button onclick="descripSelect('Epigyne (appearance): with parmula (from posterior margin)', 'epigyne_appearance-panel', `epigyne_appearance! with parmula (from posterior margin)`)" id = "buttons" class="list-group-item" >With parmula (from posterior margin)</button>
+                    <button onclick="descripSelect('Epigyne (appearance): with atrium/cavity', 'epigyne_appearance-panel', `epigyne_appearance! with atrium/cavity`)" id = "buttons" class="list-group-item" >With atrium/cavity</button>                        
+                    <button onclick = "removeSelection('epigyne_appearance-panel', 'epigyne_appearance', 'Epigyne (appearance)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for epigyne form character states -->
+            <div id = "epigyne_form-panel" class="panel-group" data-divorder= "28" data-sex = "female">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse28">Epigyne (form)</a>
+                    <button onclick="helpPopUp('myModal_27', 'helpBtn27', 'close_27')" id = "helpBtn27" class = "help_button">?</button>
+<!-- Pop up menu for epigyne form character -->
+                    <div id="myModal_27" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_27" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Flat</td>
+                                <td><img src = "images/epigyne_form_flat.jpg" data-type = "image" data-path = "images/epigyne_form_flat.jpg" class = "lb-js">
+                                    <p class = "help-text">Abacoproeces saltuum W (L. Koch, 1872)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Protrudes</td>
+                                <td><img src = "images/epigyne_form_protrudes.jpg" data-type = "image" data-path = "images/epigyne_form_protrudes.jpg" class = "lb-js">
+                                    <p class = "help-text">Micrargus herbigradus W (Blackwall, 1854)</p>
+                                  </td>
+                              </tr>                         
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse28" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Epigyne (form): flat', 'epigyne_form-panel', `epigyne_form! flat`)" id = "buttons" class="list-group-item" >Flat</button>
+                    <button onclick="descripSelect('Epigyne (form): protrudes', 'epigyne_form-panel', `epigyne_form! protrudes`)" id = "buttons" class="list-group-item" >Protrudes</button>                   
+                    <button onclick = "removeSelection('epigyne_form-panel', 'epigyne_form', 'Epigyne (form)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for epigyne seminal receptacles character states -->
+            <div id = "epigyne_seminal_receptacles-panel" class="panel-group" data-divorder= "29" data-sex = "female">                
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse29">Epigyne (seminal receptacles)</a>
+                    <button onclick="helpPopUp('myModal_28', 'helpBtn28', 'close_28')" id = "helpBtn28" class = "help_button">?</button>
+<!-- Pop up help menu for epigyne seminal receptacles character --> 
+                    <div id="myModal_28" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_28" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Underlying structures (e.g. seminal receptacles) not visible</td>
+                                <td><img src = "images/epigyne_structures_not_visible.jpg" data-type = "image" data-path = "images/epigyne_structures_not_visible.jpg" class = "lb-js">
+                                    <p class = "help-text">Erigone dentipalpis W (Wider, 1834)
+</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Underlying structures (e.g. seminal receptacles) visible</td>
+                                <td><img src = "images/epigyne_structures_visible.jpg" data-type = "image" data-path = "images/epigyne_structures_visible.jpg" class = "lb-js">
+                                    <p class = "help-text">Erigone atra W (Blackwall, 1833)</p>
+                                  </td>
+                              </tr>                            
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse29" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Epigyne (seminal receptacles): underlying structures (e.g. seminal receptacles) visible', 'epigyne_seminal_receptacles-panel', `epigyne_seminal_receptacles! underlying structures (e.g., seminal receptacles) visible`)" id = "buttons" class="list-group-item" >Underlying structures (e.g. seminal receptacles) visible</button>
+                     <button onclick="descripSelect('Epigyne (seminal receptacles): underlying structures (e.g. seminal receptacles) not visible', 'epigyne_seminal_receptacles-panel', `epigyne_seminal_receptacles! underlying structures (e.g., seminal receptacles) not visible`)" id = "buttons" class="list-group-item" >Underlying structures (e.g. seminal receptacles) not visible</button>                 
+                    <button onclick = "removeSelection('epigyne_seminal_receptacles-panel', 'epigyne_seminal_receptacles', 'Epigyne (seminal receptacles)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for male pedipalp femur appearance character states -->
+            <div id = "male_pedipalp_femur_appearance-panel" class="panel-group" data-divorder= "30" data-sex = "male">   
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse30">Male pedipalp (femur appearance)</a>
+                    <button onclick="helpPopUp('myModal_29', 'helpBtn29', 'close_29')" id = "helpBtn29" class = "help_button">?</button>
+<!-- Pop up menu for male pedipalp femur appearance character -->
+                    <div id="myModal_29" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_29" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Unremarkable</td>
+                                <td><img src = "images/male_pedipalp_femur_unremarkable.jpg" data-type = "image" data-path = "images/male_pedipalp_femur_unremarkable.jpg" class = "lb-js">
+                                    <p class = "help-text">Gonatium rubens W (Blackwall, 1833)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Conspicuous</td>
+                                <td><img src = "images/male_pedipalp_femur_conspicuous.jpg" data-type = "image" data-path = "images/male_pedipalp_femur_conspicuous.jpg" class = "lb-js">
+                                    <p class = "help-text">Erigone longipalpis W (Sundevall, 1830)</p>
+                                  </td>
+                              </tr>                             
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse30" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Male pedipalp (femur appearance): unremarkable', 'male_pedipalp_femur_appearance-panel', `male_pedipalp_femur_appearance! unremarkable`)" id = "buttons" class="list-group-item" >Unremarkable</button>
+                    <button onclick="descripSelect('Male pedipalp (femur appearance): conspicuous', 'male_pedipalp_femur_appearance-panel', `male_pedipalp_femur_appearance! conspicuous`)" id = "buttons" class="list-group-item" >Conspicuous</button>                                    
+                    <button onclick = "removeSelection('male_pedipalp_femur_appearance-panel', 'male_pedipalp_femur_appearance', 'Male pedipalp (femur appearance)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for male pedipalp patella appearance character states -->
+            <div id = "male_pedipalp_patella_appearance-panel" class="panel-group" data-divorder= "31" data-sex = "male"> 
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse31">Male pedipalp (patella appearance)</a>
+                    <button onclick="helpPopUp('myModal_30', 'helpBtn30', 'close_30')" id = "helpBtn30" class = "help_button">?</button>
+<!-- Pop up menu for male pedipalp patella appearance character -->
+                    <div id="myModal_30" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_30" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Unremarkable</td>
+                                <td><img src = "images/male_pedipalp_patella_app_unremarkable.jpg" data-type = "image" data-path = "images/male_pedipalp_patella_app_unremarkable.jpg" class = "lb-js">
+                                    <p class = "help-text">Abacoproeces saltuum M (L. Koch, 1872)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>With apophyses</td>
+                                <td><img src = "images/male_pedipalp_patella_app_apop.jpg" data-type = "image" data-path = "images/male_pedipalp_patella_app_apop.jpg" class = "lb-js">
+                                    <p class = "help-text">Hylyphantes graminicola M (Sundevall, 1830)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>With conspicuous spines (single or tufts)</td>
+                                <td><img src = "images/male_pedipalp_patella_app_spines.jpg" data-type = "image" data-path = "images/male_pedipalp_patella_app_spines.jpg" class = "lb-js">
+                                    <p class = "help-text">Agyneta gulosa M (L. Koch, 1869)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Conspicuously swollen</td>
+                                <td><img src = "images/male_pedipalp_patella_app_swollen.jpg" data-type = "image" data-path = "images/male_pedipalp_patella_app_swollen.jpg" class = "lb-js">
+                                    <p class = "help-text">Pelecopsis bucephala M (O. P.-Cambridge, 1875)</p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse31" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Male pedipalp (patella appearance): unremarkable', 'male_pedipalp_patella_appearance-panel', `male_pedipalp_patella_appearance! unremarkable`)" id = "buttons" class="list-group-item" >Unremarkable</button>
+                    <button onclick="descripSelect('Male pedipalp (patella appearance): with conspicuous spines (single or tufts)', 'male_pedipalp_patella_appearance-panel', `male_pedipalp_patella_appearance! with conspicuous spines (single or tufts)`)" id = "buttons" class="list-group-item" >With conspicuous spines (single or tufts)</button>
+                    <button onclick="descripSelect('Male pedipalp (patella appearance): conspicuously swollen', 'male_pedipalp_patella_appearance-panel', `male_pedipalp_patella_appearance! conspicuously swollen`)" id = "buttons" class="list-group-item" >Conspicuously swollen</button>
+                    <button onclick="descripSelect('Male pedipalp (patella appearance): with apophyses', 'male_pedipalp_patella_appearance-panel', `male_pedipalp_patella_appearance! with apophyses`)" id = "buttons" class="list-group-item" >With apophyses</button>                    
+                    <button onclick = "removeSelection('male_pedipalp_patella_appearance-panel', 'male_pedipalp_patella_appearance', 'Male pedipalp (patella appearance)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for male pedipalp tibia appearance character states -->
+            <div id = "male_pedipalp_tibia_appearance-panel" class="panel-group" data-divorder= "32" data-sex = "male">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse32">Male pedipalp (tibia appearance)</a>
+                    <button onclick="helpPopUp('myModal_31', 'helpBtn31', 'close_31')" id = "helpBtn31" class = "help_button">?</button>
+<!-- Pop up menu for male pedipalp tibia appearance character -->
+                    <div id="myModal_31" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_31" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Unremarkable</td>
+                                <td><img src = "images/male_pedipalp_tibia_unremarkable.jpg" data-type = "image" data-path = "images/male_pedipalp_tibia_unremarkable.jpg" class = "lb-js">
+                                    <p class = "help-text">Agnyphantes expunctus M (O. P.-Cambridge, 1875)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>With simple apophysis</td>
+                                <td><img src = "images/male_pedipalp_tibia_simple_apop.jpg" data-type = "image" data-path = "images/male_pedipalp_tibia_simple_apop.jpg" class = "lb-js">
+                                    <p class = "help-text">Diplocephalus picinus M (Blackwall, 1841)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>With multiple, simple apophyses</td>
+                                <td><img src = "images/male_pedipalp_tibia_mult_simple_apop.jpg" data-type = "image" data-path = "images/male_pedipalp_tibia_mult_simple_apop.jpg" class = "lb-js">
+                                    <p class = "help-text">Erigone dentipalpis M (Wider, 1834)</p>
+                                  </td>
+                              </tr> 
+                              <tr>
+                                <td>With complex apophysis</td>
+                                <td><img src = "images/male_pedipalp_tibia_complex_apop.jpg" data-type = "image" data-path = "images/male_pedipalp_tibia_complex_apop.jpg" class = "lb-js">
+                                    <p class = "help-text">Tiso vagans M (Blackwall, 1834)</p>
+                                  </td>
+                              </tr>   
+                              <tr>
+                                <td>With multiple, complex apophyses</td>
+                                <td><img src = "images/male_pedipalp_tibia_mult_complex_apop.jpg" data-type = "image" data-path = "images/male_pedipalp_tibia_mult_complex_apop.jpg" class = "lb-js">
+                                    <p class = "help-text">Baryphyma trifrons M (O. P.-Cambridge, 1863)</p>
+                                  </td>
+                              </tr>  
+                              <tr>
+                                <td>With one or more spines</td>
+                                <td><img src = "images/male_pedipalp_tibia_spine.jpg" data-type = "image" data-path = "images/male_pedipalp_tibia_spine.jpg" class = "lb-js">
+                                    <p class = "help-text">Lepthyphantes minutus M (Blackwall, 1833)</p>
+                                  </td>
+                              </tr>                        
+                              <tr>
+                                <td>With tufts of hairs or spines</td>
+                                <td><img src = "images/male_pedipalp_tibia_tufts.jpg" data-type = "image" data-path = "images/male_pedipalp_tibia_tufts.jpg" class = "lb-js">
+                                    <p class = "help-text">Centromerita concinna M (Thorell, 1875)</p>
+                                  </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse32" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Male pedipalp (tibia appearance): with simple apophysis', 'male_pedipalp_tibia_appearance-panel', `male_pedipalp_tibia_appearance! with simple apophysis`)" id = "buttons" class="list-group-item" >With simple apophysis</button>
+                    <button onclick="descripSelect('Male pedipalp (tibia appearance): with one or more spines', 'male_pedipalp_tibia_appearance-panel', `male_pedipalp_tibia_appearance! with one or more spines`)" id = "buttons" class="list-group-item" >With one or more spines</button>
+                    <button onclick="descripSelect('Male pedipalp (tibia appearance): with multiple, simple apophyses', 'male_pedipalp_tibia_appearance-panel', `male_pedipalp_tibia_appearance! with multiple, simple apophyses`)" id = "buttons" class="list-group-item" >With multiple, simple apophyses</button>
+                    <button onclick="descripSelect('Male pedipalp (tibia appearance): with multiple, complex apophyses', 'male_pedipalp_tibia_appearance-panel', `male_pedipalp_tibia_appearance! with multiple, complex apophyses`)" id = "buttons" class="list-group-item" >With multiple, complex apophyses</button>
+                    <button onclick="descripSelect('Male pedipalp (tibia appearance): unremarkable', 'male_pedipalp_tibia_appearance-panel', `male_pedipalp_tibia_appearance! unremarkable`)" id = "buttons" class="list-group-item" >Unremarkable</button>
+                    <button onclick="descripSelect('Male pedipalp (tibia appearance): with tufts of hair or spines', 'male_pedipalp_tibia_appearance-panel', `male_pedipalp_tibia_appearance! with tufts of hair or spines`)" id = "buttons" class="list-group-item" >With tufts of hair or spines</button>
+                    <button onclick="descripSelect('Male pedipalp (tibia appearance): with complex apophysis', 'male_pedipalp_tibia_appearance-panel', `male_pedipalp_tibia_appearance! with complex apophysis`)" id = "buttons" class="list-group-item" >With complex apophysis</button>    
+                    <button onclick = "removeSelection('male_pedipalp_tibia_appearance-panel', 'male_pedipalp_tibia_appearance', 'Male pedipalp (tibia appearance)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for male pedipalp cymbium appearance character states -->
+            <div id = "male_pedipalp_cymbium_appearance-panel" class="panel-group" data-divorder= "33" data-sex = "male">     
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse33">Male pedipalp (cymbium appearance)</a>
+                    <button onclick="helpPopUp('myModal_32', 'helpBtn32', 'close_32')" id = "helpBtn32" class = "help_button">?</button>
+<!-- Pop up menu for male pedipalp cymbium appearance character -->
+                    <div id="myModal_32" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_32" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Margin dorsal projectoins/conical elevations</td>
+                                <td><img src = "images/male_pedipalp_cymbium_notches.jpg" data-type = "image" data-path = "images/male_pedipalp_cymbium_notches.jpg" class = "lb-js">
+                                    <p class = "help-text">Trichoncus saxicola M (O. P.-Cambridge, 1861)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Simple</td>
+                                <td><img src = "images/male_pedipalp_cymbium_simple.jpg" data-type = "image" data-path = "images/male_pedipalp_cymbium_simple.jpg" class = "lb-js">
+                                    <p class = "help-text">Oedothorax agrestis M (Blackwall, 1853)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Margin with notches/bulges</td>
+                                <td><img src = "images/male_pedipalp_cymbium_notches1.jpg" data-type = "image" data-path = "images/male_pedipalp_cymbium_notches1.jpg" class = "lb-js">
+                                    <p class = "help-text">Araeoncus crassiceps M (Westring, 1861)</p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                </h4>
+                </div>
+                <div id="collapse33" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Male pedipalp (cymbium appearance): margin with notches/bulges', 'male_pedipalp_cymbium_appearance-panel', `male_pedipalp_cymbium_appearance! margin with notches/bulges`)" id = "buttons" class="list-group-item" >Margin with notches/bulges</button>
+                    <button onclick="descripSelect('Male pedipalp (cymbium appearance): simple', 'male_pedipalp_cymbium_appearance-panel', `male_pedipalp_cymbium_appearance! simple`)" id = "buttons" class="list-group-item" >Simple</button>
+                    <button onclick="descripSelect('Male pedipalp (cymbium appearance): with dorsal projections/conical elevations', 'male_pedipalp_cymbium_appearance-panel', `male_pedipalp_cymbium_appearance! with dorsal projections/conical elevations`)" id = "buttons" class="list-group-item" >With dorsal projections/conical elevations</button>                    
+                    <button onclick = "removeSelection('male_pedipalp_cymbium_appearance-panel', 'male_pedipalp_cymbium_appearance', 'Male pedipalp (cymbium appearance)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for male pedipalp paracymbium form character states -->
+            <div id = "male_pedipalp_paracymbium_form-panel" class="panel-group" data-divorder= "34" data-sex = "male">         
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse34">Male pedipalp (paracymbium form)</a>
+                    <button onclick="helpPopUp('myModal_33', 'helpBtn33', 'close_33')" id = "helpBtn33" class = "help_button">?</button>
+<!-- Pop up menu for male pedipalp paracymbium form character -->
+                    <div id="myModal_33" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_33" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Simple</td>
+                                <td><img src = "images/male_pedipalp_paracymbium_simple.jpg" data-type = "image" data-path = "images/male_pedipalp_paracymbium_simple.jpg" class = "lb-js">
+                                    <p class = "help-text">Linyphia hortensis M (Sundevall, 1830)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Complex</td>
+                                <td><img src = "images/male_pedipalp_paracymbium_complex.jpg" data-type = "image" data-path = "images/male_pedipalp_paracymbium_complex.jpg" class = "lb-js">
+                                    <p class = "help-text">Tiso vagans M (Blackwall, 1834)</p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse34" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Male pedipalp (paracymbium form): simple', 'male_pedipalp_paracymbium_form-panel', `male_pedipalp_paracymbium_form! simple`)" id = "buttons" class="list-group-item" >Simple</button>
+                    <button onclick="descripSelect('Male pedipalp (paracymbium form): complex', 'male_pedipalp_paracymbium_form-panel', `male_pedipalp_paracymbium_form! complex`)" id = "buttons" class="list-group-item" >Complex</button>    
+                    <button onclick = "removeSelection('male_pedipalp_paracymbium_form-panel', 'male_pedipalp_paracymbium_form', 'Male pedipalp (paracymbium form)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for male pedipalp branches of paracymbium presence of teeth character states -->
+            <div id = "male_pedipalp_brances_paracymbrium-panel" class="panel-group" data-divorder= "35" data-sex = "male">           
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse35">Male pedipalp (branches of paracymbium (presence of teeth))</a>
+                    <button onclick="helpPopUp('myModal_34', 'helpBtn34', 'close_34')" id = "helpBtn34" class = "help_button">?</button>
+<!-- Pop up menu for male pedipalp branches of paracymbium presence of teeth character -->
+                    <div id="myModal_34" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_34" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Teeth present</td>
+                                <td><img src = "images/male_pedipalp_teeth_present.jpg" data-type = "image" data-path = "images/male_pedipalp_teeth_present.jpg" class = "lb-js">
+                                    <p class = "help-text">Midia midas M (Simon, 1884)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Teeth absent</td>
+                                <td><img src = "images/male_pedipalp_teeth_absent.jpg" data-type = "image" data-path = "images/male_pedipalp_teeth_absent.jpg" class = "lb-js">
+                                    <p class = "help-text">Tenuiphantes tenebricola M (Wider, 1834)</p>
+                                  </td>
+                              </tr>                             
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>                    
+                  </h4>
+                </div>
+                <div id="collapse35" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Male pedipalp (branches of paracymbium (presence of teeth)): teeth present', 'male_pedipalp_brances_paracymbrium-panel', `male_pedipalp_brances_paracymbrium! teeth present`)" id = "buttons" class="list-group-item" >Teeth present</button>
+                    <button onclick="descripSelect('Male pedipalp (branches of paracymbium (presence of teeth)): teeth absent', 'male_pedipalp_brances_paracymbrium-panel', `male_pedipalp_brances_paracymbrium! teeth absent`)" id = "buttons" class="list-group-item" >Teeth absent</button>   
+                    <button onclick = "removeSelection('male_pedipalp_brances_paracymbrium-panel', 'male_pedipalp_brances_paracymbrium', 'Male pedipalp (branches of paracymbium (presence of teeth))')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for male pedipalp embolus appearance character states -->
+            <div id = "male_pedipalp_embolus_appearance-panel" class="panel-group" data-divorder= "36" data-sex = "male">           
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse36">Male pedipalp (embolus appearance)</a>
+                    <button onclick="helpPopUp('myModal_35', 'helpBtn35', 'close_35')" id = "helpBtn35" class = "help_button">?</button>
+<!-- Pop up menu for male pedipalp embolus appearance character -->
+                    <div id="myModal_35" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_35" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Unremarkable</td>
+                                <td><img src = "images/male_pedipalp_embolus_unremarkable.jpg" data-type = "image" data-path = "images/male_pedipalp_embolus_unremarkable.jpg" class = "lb-js">
+                                    <p class = "help-text">Agnyphantes expunctus M (O. P.-Cambridge, 1875)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Conspicuous, circular</td>
+                                <td><img src = "images/male_pedipalp_embolus_circular.jpg" data-type = "image" data-path = "images/male_pedipalp_embolus_circular.jpg" class = "lb-js">
+                                    <p class = "help-text">Walckenaeria capito M (Westring, 1861)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Conspicuous, circular</td>
+                                <td><img src = "images/male_pedipalp_embolus_curved.jpg" data-type = "image" data-path = "images/male_pedipalp_embolus_curved.jpg" class = "lb-js">
+                                    <p class = "help-text">Hypomma cornutum M (Blackwall, 1833)</p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </h4>
+                </div>
+                <div id="collapse36" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Male pedipalp (embolus appearance): conspicuous, curled', 'male_pedipalp_embolus_appearance-panel', `male_pedipalp_embolus_appearance! conspicuous, curled`)" id = "buttons" class="list-group-item" >Conspicuous, curled</button>
+                    <button onclick="descripSelect('Male pedipalp (embolus appearance): unremarkable', 'male_pedipalp_embolus_appearance-panel', `male_pedipalp_embolus_appearance! unremarkable`)" id = "buttons" class="list-group-item" >Unremarkable</button>
+                    <button onclick="descripSelect('Male pedipalp (embolus appearance): conspicuous, circular', 'male_pedipalp_embolus_appearance-panel', `male_pedipalp_embolus_appearance! conspicuous, circular`)" id = "buttons" class="list-group-item" >Conspicuous, circular</button>
+                    <button onclick = "removeSelection('male_pedipalp_embolus_appearance-panel', 'male_pedipalp_embolus_appearance', 'Male pedipalp (embolus appearance)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for male pedipalp lamella characteristica character states -->
+            <div id = "male_pedipalp_lamella_characteristica-panel" class="panel-group" data-divorder= "37" data-sex = "male">     
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse37">Male pedipalp (lamella characteristica presence)</a>
+                    <button onclick="helpPopUp('myModal_36', 'helpBtn36', 'close_36')" id = "helpBtn36" class = "help_button">?</button>
+<!-- Pop up menu for male pedipalp lamella characteristica character -->
+                    <div id="myModal_36" class="modal">
+                      <div class="modal-content">
+                        <span id = "close_36" class="close" >&times;</span>    
+                        <div class="container" >
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Description</th>
+                                <th>Example</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Absent</td>
+                                <td><img src = "images/male_pedipalp_lamella_absent.jpg" data-type = "image" data-path = "images/male_pedipalp_lamella_absent.jpg" class = "lb-js">
+                                    <p class = "help-text">Abacoproeces saltuum M (L. Koch, 1872)</p>
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>Conspicuous</td>
+                                <td><img src = "images/male_pedipalp_lamella_present.jpg" data-type = "image" data-path = "images/male_pedipalp_lamella_present.jpg" class = "lb-js">
+                                    <p class = "help-text">Agyneta cauta M (O. P.-Cambridge, 1902)</p>
+                                  </td>
+                              </tr>                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </h4>
+                </div>
+                <div id="collapse37" class="panel-collapse collapse">
+                  <ul class="list-group">
+                    <button onclick="descripSelect('Male pedipalp (lamella characteristica presence): present', 'male_pedipalp_lamella_characteristica-panel', `male_pedipalp_lamella_characteristica! present`)" id = "buttons" class="list-group-item" >Present</button>
+                    <button onclick="descripSelect('Male pedipalp (lamella characteristica presence): conspicuous', 'male_pedipalp_lamella_characteristica-panel', `male_pedipalp_lamella_characteristica! conspicuous`)" id = "buttons" class="list-group-item" >Conspicuous</button>
+                    <button onclick="descripSelect('Male pedipalp (lamella characteristica presence): absent', 'male_pedipalp_lamella_characteristica-panel', `male_pedipalp_lamella_characteristica! absent`)" id = "buttons" class="list-group-item" >Absent</button>
+                    <button onclick = "removeSelection('male_pedipalp_lamella_characteristica-panel', 'male_pedipalp_lamella_characteristica', 'Male pedipalp (lamella characteristica presence)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+<!-- Drop down menu for country distribution character states -->
+            <div id = "country_dist-panel" class="panel-group" data-divorder= "38">  
+              <div  class="panel panel-default">
+                <div  class="panel-heading">
+                  <h4 class="panel-title">
+                    <a  data-toggle="collapse" href="#collapse38">Country (distribution in Europe)</a>
+                  </h4>
+                </div>
+              <div id="collapse38" class="panel-collapse collapse">
+                <input style="width: 90%; padding: 0px; margin-left: 5%;" type="text"  class = "myInput2" id = "myInput2" onkeyup="myFunction2()" placeholder="Search for countries..">
+                <ul class="list-group" id = "testsearch">
+                  <button onclick = "selectCountry('Country (distribution in Europe): Albania' , 'country_dist-panel', 'country_dist!Albania')" id = "buttons" class = "list-group-item">Albania</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Andorra' , 'country_dist-panel', 'country_dist!Andorra')" id = "buttons" class = "list-group-item">Andorra</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Armenia' , 'country_dist-panel', 'country_dist!Armenia')" id = "buttons" class = "list-group-item">Armenia</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Austria' , 'country_dist-panel', 'country_dist!Austria')" id = "buttons" class = "list-group-item">Austria</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Azerbaijan' , 'country_dist-panel', 'country_dist!Azerbaijan')" id = "buttons" class = "list-group-item">Azerbaijan</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Belarus' , 'country_dist-panel', 'country_dist!Belarus')" id = "buttons" class = "list-group-item">Belarus</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Belgium' , 'country_dist-panel', 'country_dist!Belgium')" id = "buttons" class = "list-group-item">Belgium</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Bosnia and Herzegovina' , 'country_dist-panel', 'country_dist!Bosnia and Herzegovina')" id = "buttons" class = "list-group-item">Bosnia and Herzegovina</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Bulgaria' , 'country_dist-panel', 'country_dist!Bulgaria')" id = "buttons" class = "list-group-item">Bulgaria</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Croatia' , 'country_dist-panel', 'country_dist!Croatia')" id = "buttons" class = "list-group-item">Croatia</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Cyprus' , 'country_dist-panel', 'country_dist!Cyprus')" id = "buttons" class = "list-group-item">Cyprus</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Czech Republic' , 'country_dist-panel', 'country_dist!Czech Republic')" id = "buttons" class = "list-group-item">Czech Republic</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Denmark' , 'country_dist-panel', 'country_dist!Denmark')" id = "buttons" class = "list-group-item">Denmark</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Estonia' , 'country_dist-panel', 'country_dist!Estonia')" id = "buttons" class = "list-group-item">Estonia</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Faroe Islands' , 'country_dist-panel', 'country_dist!Faroe Islands')" id = "buttons" class = "list-group-item">Faroe Islands</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Finland' , 'country_dist-panel', 'country_dist!Finland')" id = "buttons" class = "list-group-item">Finland</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): France' , 'country_dist-panel', 'country_dist!France')" id = "buttons" class = "list-group-item">France</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): France / Corsica' , 'country_dist-panel', 'country_dist!France / Corsica')" id = "buttons" class = "list-group-item">France / Corsica</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Georgia' , 'country_dist-panel', 'country_dist!Georgia')" id = "buttons" class = "list-group-item">Georgia</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Germany' , 'country_dist-panel', 'country_dist!Germany')" id = "buttons" class = "list-group-item">Germany</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Gibraltar (UK)' , 'country_dist-panel', 'country_dist!Gibraltar (UK)')" id = "buttons" class = "list-group-item">Gibraltar (UK)</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Greece' , 'country_dist-panel', 'country_dist!Greece')" id = "buttons" class = "list-group-item">Greece</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Greece / Crete' , 'country_dist-panel', 'country_dist!Greece / Crete')" id = "buttons" class = "list-group-item">Greece / Crete</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Hungary' , 'country_dist-panel', 'country_dist!Hungary')" id = "buttons" class = "list-group-item">Hungary</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Iceland' , 'country_dist-panel', 'country_dist!Iceland')" id = "buttons" class = "list-group-item">Iceland</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Ireland' , 'country_dist-panel', 'country_dist!Ireland')" id = "buttons" class = "list-group-item">Ireland</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Italy' , 'country_dist-panel', 'country_dist!Italy')" id = "buttons" class = "list-group-item">Italy</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Italy / Sardinia' , 'country_dist-panel', 'country_dist!Italy / Sardinia')" id = "buttons" class = "list-group-item">Italy / Sardinia</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Italy / Sicily' , 'country_dist-panel', 'country_dist!Italy / Sicily')" id = "buttons" class = "list-group-item">Italy / Sicily</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Kosovo' , 'country_dist-panel', 'country_dist!Kosovo')" id = "buttons" class = "list-group-item">Kosovo</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Latvia' , 'country_dist-panel', 'country_dist!Latvia')" id = "buttons" class = "list-group-item">Latvia</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Liechtenstein' , 'country_dist-panel', 'country_dist!Liechtenstein')" id = "buttons" class = "list-group-item">Liechtenstein</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Lithuania' , 'country_dist-panel', 'country_dist!Lithuania')" id = "buttons" class = "list-group-item">Lithuania</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Luxembourg' , 'country_dist-panel', 'country_dist!Luxembourg')" id = "buttons" class = "list-group-item">Luxembourg</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Macedonia' , 'country_dist-panel', 'country_dist!Macedonia')" id = "buttons" class = "list-group-item">Macedonia</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Malta' , 'country_dist-panel', 'country_dist!Malta')" id = "buttons" class = "list-group-item">Malta</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Moldova' , 'country_dist-panel', 'country_dist!Moldova')" id = "buttons" class = "list-group-item">Moldova</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Montenegro' , 'country_dist-panel', 'country_dist!Montenegro')" id = "buttons" class = "list-group-item">Montenegro</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Netherlands' , 'country_dist-panel', 'country_dist!Netherlands')" id = "buttons" class = "list-group-item">Netherlands</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): None' , 'country_dist-panel', 'country_dist!None')" id = "buttons" class = "list-group-item">None</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Northern Ireland' , 'country_dist-panel', 'country_dist!Northern Ireland')" id = "buttons" class = "list-group-item">Northern Ireland</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Norway' , 'country_dist-panel', 'country_dist!Norway')" id = "buttons" class = "list-group-item">Norway</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Poland' , 'country_dist-panel', 'country_dist!Poland')" id = "buttons" class = "list-group-item">Poland</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Portugal' , 'country_dist-panel', 'country_dist!Portugal')" id = "buttons" class = "list-group-item">Portugal</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Romania' , 'country_dist-panel', 'country_dist!Romania')" id = "buttons" class = "list-group-item">Romania</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Russia, Central' , 'country_dist-panel', 'country_dist!Russia, Central')" id = "buttons" class = "list-group-item">Russia, Central</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Russia, Eastern' , 'country_dist-panel', 'country_dist!Russia, Eastern')" id = "buttons" class = "list-group-item">Russia, Eastern</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Russia, Franz Jozef Land' , 'country_dist-panel', 'country_dist!Russia, Franz Jozef Land')" id = "buttons" class = "list-group-item">Russia, Franz Jozef Land</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Russia, Kaliningrad Region' , 'country_dist-panel', 'country_dist!Russia, Kaliningrad Region')" id = "buttons" class = "list-group-item">Russia, Kaliningrad Region</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Russia, Northern' , 'country_dist-panel', 'country_dist!Russia, Northern')" id = "buttons" class = "list-group-item">Russia, Northern</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Russia, Novaya Zemlya' , 'country_dist-panel', 'country_dist!Russia, Novaya Zemlya')" id = "buttons" class = "list-group-item">Russia, Novaya Zemlya</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Russia, Southern' , 'country_dist-panel', 'country_dist!Russia, Southern')" id = "buttons" class = "list-group-item">Russia, Southern</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Russia, Western' , 'country_dist-panel', 'country_dist!Russia, Western')" id = "buttons" class = "list-group-item">Russia, Western</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Serbia' , 'country_dist-panel', 'country_dist!Serbia')" id = "buttons" class = "list-group-item">Serbia</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Slovakia' , 'country_dist-panel', 'country_dist!Slovakia')" id = "buttons" class = "list-group-item">Slovakia</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Slovenia' , 'country_dist-panel', 'country_dist!Slovenia')" id = "buttons" class = "list-group-item">Slovenia</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Spain' , 'country_dist-panel', 'country_dist!Spain')" id = "buttons" class = "list-group-item">Spain</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Spain / Balearic Islands' , 'country_dist-panel', 'country_dist!Spain / Balearic Islands')" id = "buttons" class = "list-group-item">Spain / Balearic Islands</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Svalbard' , 'country_dist-panel', 'country_dist!Svalbard')" id = "buttons" class = "list-group-item">Svalbard</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Sweden' , 'country_dist-panel', 'country_dist!Sweden')" id = "buttons" class = "list-group-item">Sweden</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Switzerland' , 'country_dist-panel', 'country_dist!Switzerland')" id = "buttons" class = "list-group-item">Switzerland</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Turkey (Asia)' , 'country_dist-panel', 'country_dist!Turkey (Asia)')" id = "buttons" class = "list-group-item">Turkey (Asia)</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Turkey (Europe)' , 'country_dist-panel', 'country_dist!Turkey (Europe)')" id = "buttons" class = "list-group-item">Turkey (Europe)</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): Ukraine' , 'country_dist-panel', 'country_dist!Ukraine')" id = "buttons" class = "list-group-item">Ukraine</button>
+                  <button onclick = "selectCountry('Country (distribution in Europe): United Kingdom' , 'country_dist-panel', 'country_dist!United Kingdom')" id = "buttons" class = "list-group-item">United Kingdom</button>
+                  <button onclick = "removeCountry('country_dist-panel', 'country_dist', 'Country (distribution in Europe)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        
+<!-- Drop down menu for prosoma length character input -->
+          <div id = "prosoma_length-panel" class="panel-group" data-divorder= "39">
+            <div  class="panel panel-default">
+              <div  class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#collapse39">Length of prosoma (mm)</a>
+                </h4>
+              </div>
+              <div id="collapse39" class="panel-collapse collapse">
+                <ul class="list-group">
+                  <input style="height: 25px;" type="text" class="form-control" id="pro_len_input" placeholder="Enter length...">
+                    <button style="height: 25px;" class = "list-group-item" onclick = "calcProbProsoma()">Enter</button>
+                    <button onclick = "removeSelection('prosoma_length-panel', 'length_of_prosoma', 'Length of prosoma (mm)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>                    
+                </ul>
+              </div>
+            </div>
+          </div>
+
+<!-- Drop down menu for Position of trichobothrium on metatarsus I(TmI) (relative to metatarsus) (mm) input -->
+           <div id = "tml_length-panel" class="panel-group" data-divorder= "40">
+            <div  class="panel panel-default">
+              <div  class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#collapse40">Position of trichobothrium on metatarsus I(TmI) (relative to metatarsus) (mm)</a>
+                </h4>
+              </div>
+              <div id="collapse40" class="panel-collapse collapse">
+                <ul class="list-group">
+                  <input type="text" class="form-control" id="tml_len_input" placeholder="Enter length...">
+                    <button class = "list-group-item" onclick = "calcProbTml()">Enter</button>
+                    <button onclick = "removeSelection('tml_length-panel', 'length_of_tml', 'Position of trichobothrium on metatarsus I(TmI) (relative to metatarsus) (mm)')" style = "display: none;" class="list-group-item" id = "removeButton">Remove</button>                    
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          
+
+        </div>
+      </div>
+  	
+<!-- Selected column -->
+      <div class="col-sm-4" id = "column2">
+        <h2 align="" style="padding-left : 5%;">Selected</h2>
+        <div class="container"  id = "selectedItems" style="width: 90%; border-width: thin; border: solid;   border-color: #E0EEE0; overflow: auto; height: 90%; top : 1px; padding: 0px;" >
+
+        </div>
+        <button onClick="window.location.reload()" style="float: right; margin-top: 2%; border-color: grey;" type="button" class = "btn">Reset</button> 
+        </div> 
+
+<!-- Species probability list -->
+  		<div class="col-sm-4" >
+  			<h2 style="padding-left: 5%;">Species probabilities</h2>
+        <input style="width: 90%; padding: 0px; margin-left: 5%;" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+  			<div class = "container" id = "probs" style=" width: 90%; height : 90%; overflow: auto;">
+  				<ul id="myUL">  
+          </ul> 
+        </div> 
+      </div>
+    </div> 
+		
+<!-- Additional libraries -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+
+    <script type="text/javascript" src = "scripting.js"></script>
+    <script type="text/javascript" src = "LB.js"></script>
+
+
+  </div>
+
+ 
+  
+	</body>
+</html>
